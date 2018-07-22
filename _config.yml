@@ -1,7 +1,8 @@
 # Site
 title:              Georg's Construction Yard
-bio:                'Bio string'
-description:        "Hopefully my blog soon."
+email:              georgjziegler@gmail.com
+bio:                'Blog on assembly programming, vintage computer hardware, game development, and boat building'
+description:        "I do assembly programming on old machines and boat building."
 reading_time:       true
 words_per_minute:   200
 logo:               'assets/img/logo.png'
@@ -27,7 +28,7 @@ sass:
   style:            compressed
 
 # Comments
-# disqus_shortname:   taylantatli
+disqus_shortname:   6809georgjz
 
 # Social
 # if you don't have any of social below, comment the line.
@@ -42,26 +43,13 @@ sass:
 # twitter:            username
 # facebook:           username
 github-url:         georgjz
-#stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
-#linkedin:          username
-#xing:              username
-# instagram:          username
-#lastfm:            username
-tumblr:             georgjz
-#medium:            '@username'
-#pinterest:         username
-#foursquare:        username
-# steam:              username
+stackoverflow:      5594534/georgjz
+#instagram:          username
+tumblr:             georgsyard
+#steam:              username
 #dribbble:          username
 #youtube:           username
 #youtube-channel:   channel
-#soundcloud:        username
-#weibo:             username
-#flickr:            username
-#codepen:           username
-#keybase:           username
-#xmpp:              username@server.com
-#hackernews:        username
 
 # Gems
 gems:
