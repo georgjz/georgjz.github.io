@@ -4,7 +4,7 @@ title:      "SNES Assembly Adventure 01: Develop for the SNES"
 date:       2018-07-22
 excerpt:    "Learn how to get started in writing your own game for the SNES by setting up a development environment"
 tags:       [test, assembly, programming]
-comments:   false
+comments:   true
 ---
 # DRAFT
 
@@ -78,11 +78,13 @@ Experienced users can skip the in-detail installation instructions and use these
 
 <i class="fa fa-linux"></i> Linux users use their distribution's package managers to install the following packages
 
-<pre>cc65 atom git bsnes-plus</pre>
+{% highlight shell %}
+cc65 atom git bsnes-plus
+{% endhighlight %}
 
-<p>Atom is optional if you already have a text editor you use for programming. Git is probably already installed. The cc65 toolchain includes the assembler and linker we need to write SNES games. Mind that the exact package names may vary across distributions, make sure you get the correct ones.</p>
+Atom is optional if you already have a text editor you use for programming. Git is probably already installed. The cc65 toolchain includes the assembler and linker we need to write SNES games. Mind that the exact package names may vary across distributions, make sure you get the correct ones.
 
-<p><i class="fa fa-windows"></i> Windows users need to install these programs:</p>
+<i class="fa fa-windows"></i> Windows users need to install these programs:
 
 * [git](https://git-scm.com/downloads)
 * [Atom](https://atom.io)
@@ -97,7 +99,9 @@ You can skip Atom if you have a preferred text editor.
 
 <i class="fa fa-apple"></i> OS X users need to install the Xcode command line tools first. Open a terminal and enter
 
-<pre>$ xcode-select --install</pre>
+{% highlight shell %}
+$ xcode-select --install
+{% endhighlight %}
 
 This will install among other tools a C++ compiler and git, which you need to build the bsnes+ emulator.
 
@@ -105,7 +109,9 @@ Next, install **Brew**. [Homebrew](https://brew.sh) is a Linux-style package man
 
 Once it is installed, use brew to install the following packages. Open a terminal and enter
 
-<pre>$ brew install cc65</pre>
+{% highlight shell %}
+$ brew install cc65
+{% endhighlight %}
 
 This will install the cc65 toolchain. Next, install <a href="https://atom.io">Atom</a> if you don't have a text editor for programming yet.
 
@@ -113,7 +119,9 @@ This will install the cc65 toolchain. Next, install <a href="https://atom.io">At
 
 <i class="fa fa-linux"></i> <i class="fa fa-windows"></i> <i class="fa fa-apple"></i> Check your installation by opening a terminal and running these commands:
 
-<pre>$ git --version<br>$ cc65 --version<br>$ bsnes</pre>
+{% highlight shell %}
+$ git --version<br>$ cc65 --version<br>$ bsnes
+{% endhighlight %}
 
 If you decide to use Atom, read the in-detail installation instructions for suggested additional packages that will enhance the editor. If you get stuck, try the in-detail installation instructions below or send me a message. The linked homepages for each tool may be helpful too.
 
@@ -123,25 +131,33 @@ Start by installing **git**.
 
 <i class="fa fa-linux"></i> Most Linux distributions ship with git installed. Else, use your distribution's package manager to install git. For Debian, Ubuntu and the like open a terminal and type
 
-<pre>$ apt-get install git</pre>
+{% highlight shell %}
+$ apt-get install git
+{% endhighlight %}
 
 <i class="fa fa-windows"></i> Windows users download the installer and execute it.
 
 <i class="fa fa-apple"></i> For OS X users the simplest way to install git is to install the Xcode command line tool as described above. Open a terminal and type the command
 
-<pre>$ xcode-select --install</pre>
+{% highlight shell %}
+$ xcode-select --install
+{% endhighlight %}
 
 This will install a C++ toolchain you need to build bsnes+.
 
 <i class="fa fa-linux"></i> <i class="fa fa-windows"></i> <i class="fa fa-apple"></i> Test your git installation by opening a terminal and typing
 
-<pre>$ git --version</pre>
+{% highlight shell %}
+$ git --version
+{% endhighlight %}
 
 Next, **the editor**. Installing it is as easy as it gets. If you have a preferred editor, you can skip this step.
 
 <i class="fa fa-linux"></i> If you're on Linux, open a terminal and use your package manager to install Atom:
 
-<pre>$ apt-get install atom</pre>
+{% highlight shell %}
+$ apt-get install atom
+{% endhighlight %}
 
 Alternatively, download the [.deb](https://atom.io/download/deb) or [rpm](https://atom.io/download/rpm) file and install it.
 
@@ -155,7 +171,9 @@ This step is easiest on Linux and OS X, Windows users will need to take an extra
 
 <i class="fa fa-linux"></i> Linux users again use their trusty package manager to install cc65:
 
-<pre>$ apt-get install cc65</pre>
+{% highlight shell %}
+$ apt-get install cc65
+{% endhighlight %}
 
 If you prefer to build from source, follow the [instructions of the cc65 GitHub page](http://cc65.github.io/cc65/getting-started.html).
 
@@ -163,11 +181,15 @@ If you prefer to build from source, follow the [instructions of the cc65 GitHub 
 
 <i class="fa fa-apple"></i> OS X users will enlist the help of their (new) package manager, brew. Open a terminal and type
 
-<pre>$ brew install cc65</pre>
+{% highlight shell %}
+$ brew install cc65
+{% endhighlight %}
 
 <i class="fa fa-linux"></i> <i class="fa fa-windows"></i> <i class="fa fa-apple"></i> Test your installation by opening a terminal and typing:
 
-<pre>$ cc65 --version</pre>
+{% highlight shell %}
+$ cc65 --version
+{% endhighlight %}
 
 If you run into any trouble, check out the [cc65 Wiki](https://github.com/cc65/wiki/wiki) on GitHub for installation instructions. They have detailed installation instructions for each system.
 
@@ -175,7 +197,9 @@ Finally, **the bsnes+ emulator**.
 
 <i class="fa fa-linux"></i> Linux users use their package manager again to install bsnes+:
 
-<pre>$ apt-get install bsnes-plus</pre>
+{% highlight shell %}
+$ apt-get install bsnes-plus
+{% endhighlight %}
 
 Unfortunately, for Windows and Mac users the process is a bit more complicated. You will have to build the emulator from source. I'll try and guide you through every single step.
 
@@ -187,7 +211,9 @@ Unfortunately, for Windows and Mac users the process is a bit more complicated. 
 
 Installing mingw-w64 is easy, download the [Installer](http://mingw-w64.org/doku.php) and execute it. Test it by opening a command line window and typing
 
-<pre>$ g++</pre>
+{% highlight shell %}
+$ g++
+{% endhighlight %}
 
 If Windows can't find the application, you need to add `MinGW\bin` to your path the same way you added `C:\cc65\bin`.
 
@@ -199,25 +225,35 @@ Now download the bsnes+ source code with git from GitHub. Open a command line wi
 
 This will create a new directory called `bsnes-plus`. Navigate to it and start the build process:
 
-<pre>$ cd bsnes-plus\bsnes<br>$ make</pre>
+{% highlight shell %}
+$ cd bsnes-plus\bsnes<br>$ make
+{% endhighlight %}
 
 If no error occurs during building, you should find the bsnes+ executable in the `bin` subdirectory. If you have trouble building bsnes+, check the [bsnes-plus GitHub page](https://github.com/cc65/wiki/wiki#Host_platforms). Alternatively, download a [bsnes+ executable](http://sourceforge.net/projects/cc65/files/cc65-snapshot-win32.zip). But I recommend you build it yourself to get the latest version. Remember to add bsnes+ to your PATH.
 
 <i class="fa fa-apple"></i> Now on to OS X. This build process will be a bit more complicated since OS X dropped support for Qt 4.8.6 but there is a workaround. OS X version 10.12 and later need this workaround:
 
-<pre>$ brew install cartr/qt4/qt<br>$ brew linkapps qt</pre>
+{% highlight shell %}
+$ brew install cartr/qt4/qt<br>$ brew linkapps qt
+{% endhighlight %}
 
 Make sure that the environmental variable `qtpath` is set by adding this to your `.bash_profile` file:
 
-<pre>export qtpath=/usr/local/Cellar/qt/4.8.7_2</pre>
+{% highlight shell %}
+export qtpath=/usr/local/Cellar/qt/4.8.7_2
+{% endhighlight %}
 
 Now create a working directory anywhere you like. Open a terminal. Navigate to that directory and download the source code of bsnes+ with git:
 
-<pre>$ git clone https://github.com/cc65/cc65.git</pre>
+{% highlight shell %}
+$ git clone https://github.com/cc65/cc65.git
+{% endhighlight %}
 
 This will create a new directory called `bsnes-plus`, move into it and start the build process:
 
-<pre>$ cd bsnes-plus/bsnes<br>$ make</pre>
+{% highlight shell %}
+$ cd bsnes-plus/bsnes<br>$ make
+{% endhighlight %}
 
 If the build succeeds, there should be a new subdirectory called bin. There you will find bsnes+. If you encounter any problems, check the [bsnes-plus GitHub page](https://github.com/devinacker/bsnes-plus), scroll down to find installation instructions for help.
 
@@ -243,7 +279,9 @@ Don't forget to save. Next, you will build your very first SNES game!
 
 Open a terminal and navigate to the directory where the files reside you just created. Then enter the following command to invoke the cc65 toolchain to build your first game:
 
-<pre>$ ca65 --cpu 65816 -o nihil.o nihil.s<br>$ ld65 -C memmap.cfg nihil.o -o nihil.smc</pre>
+{% highlight shell %}
+$ ca65 --cpu 65816 -o nihil.o nihil.s<br>$ ld65 -C memmap.cfg nihil.o -o nihil.smc
+{% endhighlight %}
 
 Make sure you use an upper-case C on the second command. Otherwise, ld65 will complain. You might wonder about ca65 and ld65. Those are the assembler and linker I told you earlier about. The cc65 toolchain is made up of several tools. We will take a closer look at how they work in the next articles. If everything worked, there should be a new file called `nihil.smc`.
 
