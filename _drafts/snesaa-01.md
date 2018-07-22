@@ -233,93 +233,37 @@ You will now write your first lines of 65816 assembly. I suggest you keep all fi
 
 Open your editor and create a new file `nihil.s` and enter this code:
 
-{% highlight nasm %}
-; -----------------------------------------------------------------------------
-;   File: nihil.s
-;   Description: Your very first SNES game!
-; -----------------------------------------------------------------------------
+{% gist ef13308cb7108b41730c0166c0573eb0 %}
 
-;----- Assembler Directives ----------------------------------------------------
-.p816                           ; this is 65816 code
-.i16                            ; X and Y registers are 16 bit
-.a8                             ; A register is 8 bit
-;-------------------------------------------------------------------------------
+Next, create another file called `memmap.cfg`, enter this code:
 
-;-------------------------------------------------------------------------------
-;   This is were the magic happens
-;-------------------------------------------------------------------------------
-.segment "CODE"
-.proc   ResetHandler            ; program entry point
-        ; sei                     ; disable interrupts
-        clc                     ; clear the carry flag...
-        xce                     ; ...and switch to native mode
+{% gist 293ff9ba924da2530cbeedf0853e35aa %}
 
-        lda #$81                ; enable...
-        sta $4200               ; ...non-maskable interrupt
+Don't forget to save. Next, you will build your very first SNES game!
 
-        jmp GameLoop            ; initialisation done, jump to game loop
-.endproc
-
-.proc   GameLoop                ; The main game loop
-        wai                     ; wait for NMI interrupt
-        jmp GameLoop            ; jump to beginning of main game loop
-.endproc
-
-.proc   NMIHandler              ; NMIHandler, called every frame/V-blank
-        lda $4210               ; read NMI status
-        rti                     ; interrupt done, return to main game loop
-.endproc
-
-;-------------------------------------------------------------------------------
-;   Interrupt and Reset vectors for the 65816 CPU
-;-------------------------------------------------------------------------------
-.segment "VECTOR"
-; native mode   COP,        BRK,        ABT,
-.addr           $0000,      $0000,      $0000
-;               NMI,        RST,        IRQ
-.addr           NMIHandler, $0000,      $0000
-
-.word           $0000, $0000    ; four unused bytes
-
-; emulation m.  COP,        BRK,        ABT,
-.addr           $0000,      $0000,      $0000
-;               NMI,        RST,        IRQ
-.addr           $0000 ,     ResetHandler, $0000
-{% endhighlight %}
-
-
-<p>Next, create another file called memmap.cfg, enter this code:</p>
-
-<code data-gist-id="293ff9ba924da2530cbeedf0853e35aa"></code>
-
-<p>Don't forget to save. Next, you will build your very first SNES game!</p>
-
-<p>Open a terminal and navigate to the directory where the files reside you just created. Then enter the following command to invoke the cc65 toolchain to build your first game:</p>
+Open a terminal and navigate to the directory where the files reside you just created. Then enter the following command to invoke the cc65 toolchain to build your first game:
 
 <pre>$ ca65 --cpu 65816 -o nihil.o nihil.s<br>$ ld65 -C memmap.cfg nihil.o -o nihil.smc</pre>
 
-<p>Make sure you use an upper-case C on the second command. Otherwise, ld65 will complain. You might wonder about ca65 and ld65. Those are the assembler and linker I told you earlier about. The cc65 toolchain is made up of several tools. We will take a closer look at how they work in the next articles. If everything worked, there should be a new file called nihil.smc.</p>
+Make sure you use an upper-case C on the second command. Otherwise, ld65 will complain. You might wonder about ca65 and ld65. Those are the assembler and linker I told you earlier about. The cc65 toolchain is made up of several tools. We will take a closer look at how they work in the next articles. If everything worked, there should be a new file called `nihil.smc`.
 
-<p>Open bsnes+ and open your new file with it. On startup, select the compatibility profile. Now you should see this:</p>
+Open bsnes+ and open your new file with it. On startup, select the compatibility profile. Now you should see this:
 
-<p><figure class="tmblr-full" data-orig-height="503" data-orig-width="500" data-orig-src="https://78.media.tumblr.com/6758d5992250acd8e9b3b096b50b74cb/tumblr_inline_p67u2tT2jE1re8b80_540.png"><img src="https://78.media.tumblr.com/eda644f6f91f6154e25c4756e5475a2c/tumblr_inline_p9xnq8fy6Z1re8b80_540.png" alt="" data-orig-height="503" data-orig-width="500" data-orig-src="https://78.media.tumblr.com/6758d5992250acd8e9b3b096b50b74cb/tumblr_inline_p67u2tT2jE1re8b80_540.png"></figure></p>
+[[SCREENSHOT]]
 
-<p>Congratulations! This is your first SNES game. It is very nihilistic inasmuch it does absolutely <em>nothing</em>. (That's not entirely true, the code acknowledges that the so-called Non-Maskable Interrupt occurred - and returns to waiting/doing nothing. But more on this in the next articles). I told you your first game would be boring.</p>
+Congratulations! This is your first SNES game. It is very nihilistic inasmuch it does absolutely <em>nothing</em>. (That's not entirely true, the code acknowledges that the so-called Non-Maskable Interrupt occurred - and returns to waiting/doing nothing. But more on this in the next articles). I told you your first game would be boring.
 
-<p>
 But don't be disappointed, you have achieved a lot today. You have set up a development environment. This is often the hardest part of game development. You will use to learn all about SNES assembly programming. Your adventure has just started.
-</p>
 
-<p>That's all for today. In the next article, I will introduce you to 65816 assembly programming. I hope you enjoyed this first article of hopefully many more to come.</p>
+That's all for today. In the next article, I will introduce you to 65816 assembly programming. I hope you enjoyed this first article of hopefully many more to come.
 
-<p>I'm always happy for comments and suggestions, use the AMA function or just drop me a message.</p>
+I'm always happy for comments and suggestions, use the AMA function or just drop me a message.
 
-<h3>References and Links</h3>
+### References and Links
 
-<ul><li>Here is a nice <a href="https://www.rollingstone.com/culture/news/super-nintendo-25-year-anniversary-why-snes-still-matters-w435671">article</a> about the history of the SNES</li>
-<li>If you prefer watching videos check <a href="https://www.youtube.com/watch?v=RqfnreKMPE8">this one</a> out</li>
-<li>The <a href="https://wiki.superfamicom.org">Super Famicom Development Wiki</a> is a great resource for SNES programming. I will reference it in future articles, so add it to your bookmark</li>
-</ul></p>
+* Here is a nice [article](https://www.rollingstone.com/culture/news/super-nintendo-25-year-anniversary-why-snes-still-matters-w435671) about the history of the SNES
+* If you prefer watching videos check [this one](https://www.youtube.com/watch?v=RqfnreKMPE8) out. Watch his other videos too, they're really good!
+* The [Super Famicom Development Wiki](https://wiki.superfamicom.org) is a great resource for SNES programming. I will reference it in future articles, so add it to your bookmarks
 
 [atom_link]: https://www.atom.io
 [vsc_link]: https://code.visualstudio.com
