@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "My very first blog post"
-date: 2018-07-23
+date: 2018-07-22
 excerpt: "By the pricking of my thumbs // Something wicked this way comes"
 tags: [first post, blogging, about me]
 comments: true
