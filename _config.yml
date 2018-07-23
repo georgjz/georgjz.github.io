@@ -9,8 +9,9 @@ logo:               'assets/img/logo.png'
 background:         'assets/img/placeholder-big.jpg'
 tiled_bg:           false   # Set this true if you want to tile your background image, otherwise it will be covered
 locale:             en_US
-url:                https://georgjz.github.io
-# url:                ""
+# url:                https://georgjz.github.io
+url:                http://localhost:4000
+baseurl:            /
 
 # Jekyll
 permalink:          /:title/
@@ -32,9 +33,9 @@ disqus_shortname:   georgsyard
 
 # Social
 # if you don't have any of social below, comment the line.
-#google:
+google:
   #plus:            #username
-  #analytics:
+  analytics:        UA-122825347-1
   #verify:
   #ad-client:
   #ad-slot:
