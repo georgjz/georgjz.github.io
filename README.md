@@ -1,5 +1,5 @@
-# Nothing to see here.
-I'm trying out GitHubs pages feature to see if I might turn this into a blog.
+# Repo for my personal blog.
+I'm trying to start a personal blog. Hope this works out.
 
 # Moon Jekyll Theme [![Donate](https://img.shields.io/badge/paypal-donate-blue.svg)](https://www.paypal.me/taylantatli/0usd)  
 
