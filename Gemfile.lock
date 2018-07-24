@@ -29,6 +29,7 @@ GEM
       rouge (~> 1.7)
       safe_yaml (~> 1.0)
     jekyll-feed (0.7.2)
+    jekyll-figure (0.0.2)
     jekyll-gist (1.5.0)
       octokit (~> 4.2)
     jekyll-mentions (1.4.0)
@@ -80,6 +81,7 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 3.2.1)
   jekyll-feed
+  jekyll-figure
   jekyll-gist
   jekyll-mentions
   jekyll-sitemap
