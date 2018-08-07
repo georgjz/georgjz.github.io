@@ -13,7 +13,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     forwardable-extended (2.6.0)
-    html-pipeline (2.8.3)
+    html-pipeline (2.8.4)
       activesupport (>= 2)
       nokogiri (>= 1.4)
     i18n (1.0.1)
@@ -29,7 +29,6 @@ GEM
       rouge (~> 1.7)
       safe_yaml (~> 1.0)
     jekyll-feed (0.7.2)
-    jekyll-figure (0.0.2)
     jekyll-gist (1.5.0)
       octokit (~> 4.2)
     jekyll-mentions (1.4.0)
@@ -37,6 +36,8 @@ GEM
       jekyll (~> 3.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
+    jekyll-seo-tag (2.0.0)
+      jekyll (~> 3.1)
     jekyll-sitemap (0.11.0)
       addressable (~> 2.4.0)
     jekyll-watch (1.5.1)
@@ -81,9 +82,9 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 3.2.1)
   jekyll-feed
-  jekyll-figure
   jekyll-gist
   jekyll-mentions
+  jekyll-seo-tag
   jekyll-sitemap
 
 BUNDLED WITH
