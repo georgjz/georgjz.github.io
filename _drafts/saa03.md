@@ -8,11 +8,11 @@ feature:    /assets/snesaa/02/saa02_featurecard.gif
 published:  true
 comments:   true
 ---
-# SECOND DRAFT
+# THIRD DRAFT
 
 Welcome back, Adventurer. I hope the last time wasn't too hard on you. I admit it got a bit long (I strive to keep it under 2,500 words, the last one was 3,900). But we covered some important ground that will come in handy later.
 
-In this article (should I start calling them dungeons instead? Levels? Quests? I'll think about it), we will go about things a bit differently. Since the last article was heavy on the theory I want to keep this one a bit more practical.
+In this article (should I start calling them dungeons instead? Levels? Quests? I'll think about it) we will go about things a bit differently. Since the [last article][1] was heavy on the theory, I want to keep this one a bit more practical.
 
 I promised you in the last article that you will create a sprite to display later on the SNES, so in this article, we will
 
@@ -24,7 +24,7 @@ And in the next article, we will use that sprite and display it on the SNES. Let
 [[ saa03 card ]]
 
 ### Intertwined and Planar Graphic Formats
-The SNES relies on a technique called *(indirect) color indexing* (in fact, the NES and Game Boy used this technique too, as we will see shortly). Instead of saving the color of a certain pixel, the index number of a color is saved that references a color inside a palette.
+The SNES relies on a technique called [*(indirect) color indexing*][2] (in fact, the NES and Game Boy used this technique too, as we will see shortly). Instead of saving the color of a certain pixel, the index number of a color is saved that references a color inside a palette.
 
 Let's look at a simple 8 x 8 example. This first image is in *1 bit per pixel* format, or 1bpp:
 
@@ -75,13 +75,13 @@ This again might sound confusing, so let's try to clarify this with another pict
 
 On top, you have the two bitplanes and their hexadecimal equal. Below you see the graphics data stored once in planar and once in intertwined format. In both cases, The bytes are stored in consecutive memory locations from top to bottom.
 
-Why does the distinction matter? Nintendo has used both formats in their consoles. While the NES stored graphics data in planar format, the Game Boy used the intertwined format. Both consoles could display sprites with a maximum of four colors (why they used different formats on each console is anyone's guess; the overall architectures off both consoles aren't that different, to it probably came down to a factor like performance or code design).
+Why does the distinction matter? Nintendo has used both formats in their consoles. While the NES stored graphics data in planar format, the Game Boy used the intertwined format. Both consoles could display sprites with a maximum of four colors (why they used different formats on each console is anyone's guess; the overall architectures off both consoles aren't that different, to it probably came down to a factor like performance or system design).
 
 So which format does the SNES use? The answer is both.
 
-I know, more confusion. But before I explain that, there is an important piece of information to add: While I simply used white as the color 0 of the palette, this isn't entirely correct. The first color of a palette has a special function. The SNES considers the first color in any palette as *transparent* and will not render it. So any pixel that has the color index 0 will not be displayed. We will see this in action in the example code later on.
+I know, more confusion. But before I explain that, there is an important piece of information to add: While I simply used white as the color 0 of the palette, this isn't entirely correct. The first color of a palette has a special function. The SNES considers the first color in any palette as *transparent* and will not render it. So any pixel that has the color index 0 will not be displayed. We will see this in action shortly.
 
-Now, back planar and intertwined. I told you the SNES uses both formats. Why? The SNES (unlike the NES and Game Boy) can actually switch between different bits-per-pixel formats. In fact, the SNES supports a total of five bit formats: 2bpp, 3bpp, 4bpp, 8bpp, and the special Mode 7 format (this is the ominous mode used in some games to simulate some kind of pseudo 3D rendering, e.g. the Final Fantasy VI opening sequence, Mario Kart, or Wipeout; I will cover Mode 7, but that is -sadly- still some way off).
+Now, back planar and intertwined. I told you the SNES uses both formats. Why? The SNES (unlike the NES and Game Boy) can actually switch between different bits-per-pixel formats. In fact, the SNES supports a total of five bit formats: 2bpp, 3bpp, 4bpp, 8bpp, and the special Mode 7 format (this is the ominous mode used in some games to simulate some kind of pseudo 3D rendering, e.g. the Final Fantasy VI opening sequence, Mario Kart, or R-Type; I will cover Mode 7, but that is -sadly- still some way off).
 
 You already know 1bpp and 2bpp. Extending 2bpp to 3bpp and 4bpp isn't hard if you understand how color indexing works by now. You simply add the extra bitplanes needed. So 3bpp will let you use a total of eight colors, 4bpp a total of 16 colors. The two most frequently used formats are 2bpp (HUD elements and background) and 4bpp (backgrounds and sprites).
 
@@ -94,7 +94,7 @@ Let's put this new knowledge to good use and actually create a 16 x 16 sprite (w
 ## Handcrafting a Sprite
 Before we start, let me state that this is **not** the best way to create graphic assets for the SNES. There are a lot of tools on the web that will automatically convert assets in jpg, png, bmp, or any other format to 2bpp/4bpp for you. I will link some common tools in the *Links and Reference* section at the end of this article.
 
-Since the victory of Sonicfox at Evo 2018 is all the rage right now,  will recreate the face of Super Kai from *Dragon Ball Z: Super Butouden 3*. I am a horrible pixel artist, so I won't take you through all steps of creating pixel arts, there are more than enough tutorials and guide around on the web. So, here are the finished sprites:
+Since the victory of [Sonicfox at Evo 2018][3] is all the rage right now,  will recreate the face of Super Kai from *Dragon Ball Z: Super Butouden 3*. I am a horrible pixel artist, so I won't take you through all steps of creating pixel arts, there are more than enough tutorials and guide around on the web. So, here are the finished sprites:
 
 <figure>
     <a href="{{ "/assets/snesaa/03/saa03_superkai01.png" | absolute_url }}">
@@ -114,7 +114,7 @@ Since we're going to use a 4bpp format, I can use up to 16 colors (remember to r
 
 No surprises here. There is no need to use all 16 colors, so the last color of the palette is simply set to black. Since we can use any color for transparency, I simply chose a gray tone.
 
-Now, let's translate this by hand with the help of a hex editor. I prefer hyx, but you can use any editor you see fit. Mind again that I'm doing this only for educational and demonstration purposes. When creating your own game assets you can, of course, rely on (automated) tools to do this step for you.
+Now, let's translate this by hand with the help of a hex editor. I prefer [hyx][3], but you can use any editor you see fit. I'll link some down in the *Links and References* section. Mind again that I'm doing this only for educational and demonstration purposes. When creating your own game assets you can, of course, rely on (automated) tools to do this step for you.
 
 I will take the first row of the first sprite (upper-left) and work my way from the left-most pixel to the right. Since we're using 4bpp, we now have 4 bitplanes: bitplane 0, 1, 2, and 3. Now, do we store the bitplanes in planar or intertwined format? The answer is both.
 
@@ -191,3 +191,33 @@ Again, the process I described here is definitely *not* the way to go about when
 
 ## Conclusion
 After the last programming theory-heavy article, this article explained (a bit more practical) how the graphics format on the SNES works (in fact, most retro consoles like the NES, Game Boy, Genesis/Mega Drive, etc. use this format in some variation). You created your own first sprites and palette by hand. In the next article, we will take these sprites and palette and display them on the SNES. So finally you will put your theoretical knowledge to use!
+
+As always, comments and suggestions are always welcome. Please use the comment function below.
+
+## Links and References
+* If you struggle with the graphics formats described here, I highly recommand you check out these two links:
+    * [This video][12] explains how bitplanes and palettes work in great detail. His other videos are fantastic too, definitely subscribe to his channel!
+    * Another great explanation can be found [here][13]. Don't be put off by the design, it's from a simpler time. This also includes information on a lot of other consoles.
+* Here are some tools for converting graphics to a SNES format:
+    * [YY-CHR][5] is the preferred tool of many ROM hackers (yes, there are still *active* geocities sites). Check out [this tutorial][6] on how to use it.
+    * I have written my [own tool][7]. It will take a single file and automatically convert it to a 4bpp and palette file. It's in a very early stage and by no end finished yet. Use at own risk.
+    * The awesome ROM hackers at smwcentral.net have an [extensive list][8] of tools you can use.
+* Here are some alternative hex editors if you don't like working solely on the command line:
+    * [HxD][9] is a good hex editor for Windows users.
+    * [hexfiend][10] should make the OS X user happy.
+    * [wmMEdit][11] is a cross-platform hex editor with a nice GUI.
+
+
+[1]: {{ site.baseurl }}{% post_url 2018-08-02-snesaa02 %}
+[2]: https://en.wikipedia.org/wiki/Indexed_color
+[3]: https://www.youtube.com/watch?v=OVvKn7odYzQ
+[4]: https://yx7.cc/code/
+[5]: http://www.geocities.jp/yy_6502/yychr/index.html
+[6]: https://www.smwcentral.net/?p=viewthread&t=88328
+[7]: https://github.com/georgjz/kitsune
+[8]: https://www.smwcentral.net/?p=section&s=tools&u=0&f[tags]=graphics
+[9]: https://mh-nexus.de/en/hxd/
+[10]: https://ridiculousfish.com/hexfiend/
+[11]: https://wxmedit.github.io
+[12]: https://www.youtube.com/watch?v=57ibhDU2SAI
+[13]: https://mrclick.zophar.net/TilEd/download/consolegfx.txt
