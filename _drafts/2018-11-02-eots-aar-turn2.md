@@ -13,18 +13,28 @@ comments:   true
 ### Introduction
 Besides machine language programming, I enjoy strategy games, especially hex and counter wargames. One of my favorites is [Empire of The Sun][1] by Mark Herman. This game simulates the Pacific Theater of World War II on an operational level. The Japanese must force the US into negotiating a peace treaty by lowering US political will, while the Allies must push back the Japanese and prevent them from taking precious resources that will fuel the Japanese war machine.
 
-I will assume you, the reader, are somewhat familiar with the [rules][2]. *Empire of The Sun* is a CDG or *Card Driven Game*. If you're interested in details, here is a [good video][3] by the designer himself explaining the basics. There is another good [series of videos][4] by John Steidl that'll explain the basic rules and concepts in great detail (the good kind of binge watching!).
+I will assume you, the reader, are somewhat familiar with the [rules][2]. *Empire of The Sun* is a CDG or *Card Driven Game*. If you're interested in details, here is a [good video][3] by the designer himself explaining the basics. There is another good [series of videos][4] by John Steidl that'll explain the basic rules and concepts in great detail (for the good kind of binge-watching!).
 
 That being said, let's get into it!
 
 ### Setup
 I found my opponent on [Board Game Geek][5]. We agreed to use [Vassal][6] to start a PBEM (play by e-mail) game. Empire of The Sun plays very well as PBEM game, since planing a turn's strategy can be time-consuming. It also eliminates the need to somehow store the game between sessions (a problem every wargamer faces). We will play the 1942 Campaign scenario:
 
-[1942 start up]
+<figure>
+    <a href="{{ "/assets/eots/T1_setup.png" | uri_escape | absolute_url }}">
+        <img src="{{ "/assets/eots/T1_setup.png" | uri_escape | absolute_url }}">
+    </a>
+    <figcaption>The setup for the 1942 Campaign</figcaption>
+</figure>
 
-As per scenario rules, the Allies get free Naval Emergency Movements to open the game. My opponent moves the US Asia Fleet (one CA, one DD unit) into Tjilatjap (2019), where the Dutch light cruiser is already waiting. A bit of an unorthodox move. But one that will force me to improvise a bit. A lucky card draw helps me greatly to reduce the threat this fleet poses, as we will see shortly.
+As per scenario rules, the Allies get free Naval Emergency Movements to open the game. My opponent moves both CA and DD US Asia Fleet units into Tjilatjap (2019), where the Dutch light cruiser is already waiting. A bit of an unorthodox move. But one that will force me to improvise a bit. A lucky card draw helps me greatly to reduce the threat this fleet poses, as we will see shortly.
 
-[opening fleet]
+<figure>
+    <a href="{{ "/assets/eots/T1_allies_emergency_nm.png" | uri_escape | absolute_url }}">
+        <img src="{{ "/assets/eots/T1_allies_emergency_nm.png" | uri_escape | absolute_url }}">
+    </a>
+    <figcaption>The Allied fleet at Tjilatjap</figcaption>
+</figure>
 
 After the NEM, we draw our opening hands. I opt not to take the historical variant (which would give me three fixed cards and four random), so I draw seven random cards. The Allies opt to take the *Arcadia Conference* card (\#4) since there really isn't a reason not to. He draws four additional cards to complete his hand.
 
@@ -58,13 +68,18 @@ I commence the festivities with a standard offensive: My goal is to take out the
 **Activations and Movements**: Combined Fleet HQ for 7 activations
 
 * The 3rd and 4th Air Division move from Nagoya (3407) to Aparri (2911). They'll attack Manila (2813); Manila will be a battle hex.
-* The 16th Army (reduced), Nachi (CA), and Ryujo (CVL) move from Davao (2915) to invade Soerabaja (2220).
+* The 16th Army (reduced), CA Nachi, and CVL Ryujo move from Davao (2915) to invade Soerabaja (2220).
 * The 19th Army (reduced) moves from (2913) to invade Vogelkop (3219).
 * The 22nd Air Fleet moves from Saigon (2212) to Kota Bharu (2112) to attack Singapore (2015); Singapore will be a battle hex.
 
-I used both additional ASP the card event grants me.
+I used both additional ASPs the card event grants me.
 
-[board situation prior to battle]
+<figure>
+    <a href="{{ "/assets/eots/T1_prebattle_1.png" | uri_escape | absolute_url }}">
+        <img src="{{ "/assets/eots/T1_prebattle_1.png" | uri_escape | absolute_url }}">
+    </a>
+    <figcaption>Situation prior to battle, declared battle hexes</figcaption>
+</figure>
 
 **Reactions**: The Allies opt for an intel roll: 6. So the intelligence status changes to *Intercept*. He activates SW Pac HQ and moves SL Corps from (2912) into Manila (2813).
 
@@ -78,8 +93,15 @@ The invasions of Soerabaja (2220) and Vogelkop (3219) are unopposed and succeed.
 **Post Battle Movement**: The Allies have no active unit eligible for PBM, so Japan conducts PBM next.
 
 * The 4th Air Division moves from Aparri (2911) to Jitra (1912); this will neutralize the Malaya HQ.
-* Nachi (CA) moves from Soerabaja (2220) to Hong Kong (2709).
-* All other naval and air units stay where they are; Ryujo (CVL) prevents the units in Tjilatjap (2019) from being activated.
+* CA Nachi moves from Soerabaja (2220) to Hong Kong (2709).
+* All other naval and air units stay where they are; CVL Ryujo prevents the units in Tjilatjap (2019) from being activated.
+
+<figure>
+    <a href="{{ "/assets/eots/T1_postbattle_1.png" | uri_escape | absolute_url }}">
+        <img src="{{ "/assets/eots/T1_postbattle_1.png" | uri_escape | absolute_url }}">
+    </a>
+    <figcaption>Situation after battle resolution</figcaption>
+</figure>
 
 My first offensive was quite effective. I took out two Allied air units, took two resource hexes, and suffered no losses myself. The dice so far have favored me. Let's see how the Allies open the game.
 
@@ -93,7 +115,7 @@ My first offensive was quite effective. I took out two Allied air units, took tw
 
 The Allies opt to play this as an OC card to remove SW Pac HQ. It's placed on the turn marker for return in turn 3.
 
-*My Take*: An interesting move. Instead of playing *Arcadia Conference* (\#4) into Australia or the DEI, he opts to pull SW Pac HQ early. So he may (or may not) bring it take this turn if he wishes. And he made the smart move to reinforce Manila before pulling out. But it will also prevent him from activating the units trapped in Tjilatjap (2019) for (at least) one more card play. I'll make use of that.
+<u>My Take</u>: An interesting move. Instead of playing *Arcadia Conference* (\#4) into Australia or the DEI, he opts to pull SW Pac HQ early. So he may (or may not) bring it back this turn if he wishes. And he made the smart move to reinforce Manila before pulling out. But it will also prevent him from activating the units trapped in Tjilatjap (2019) for (at least) one more card play. I'll make use of that.
 
 ### Japan Card 2: *Naval Battle of Guadalcanal* (\#20) as EC
 <figure>
@@ -108,15 +130,22 @@ My first offensive went smoothly, so I'll try to keep up the momentum and contin
 **Activations and Movements**: Combined Fleet HQ for 8 activations
 
 * 27th Army (reduced) moves from Hakodate (3704) to invade Amchitka (4700), 1 ASP used.
-* Nachi (CA) and 17th Army (reduced) move from Hong Kong (2709) to invade Balikpapan (2517), 1 ASP used; Balikpapan will be a battle hex.
+* CA Nachi and 17th Army (reduced) move from Hong Kong (2709) to invade Balikpapan (2517), 1 ASP used; Balikpapan will be a battle hex.
 * 3rd Air Division moves from Aparri (2911) to Davao (2915); will participate in the battle hex in Balikpapan.
-* Zuiho (CVL) from Davao (2915), and 19th Army from Vogelkop (3219) invade Tarakan (2616), 1 ASP used; Tarakan will be a battle hex.
-* Kongo (BB) moves from Cam Ranh (2311) to Tjilatjap (2019); Tjilatjap will be a battle hex.
+* CVL Zuiho from Davao (2915), and 19th Army from Vogelkop (3219) invade Tarakan (2616), 1 ASP used; Tarakan will be a battle hex.
+* BB Kongo moves from Cam Ranh (2311) to Tjilatjap (2019); Tjilatjap will be a battle hex.
 * 25th Army (reduced) moves from Kota Bharu (2112) to Bangka (2017), 1 ASP used.
 
-The idea of invading Amchitka is twofold: I want to force him to at least divert some resources to retaking Amchitka. And I want to be able to threaten Midway with a 2-card. Amchitka is in range of Combined Fleet HQ, exactly 10 hexes away from Midway, and there is no way for the Allies to block supplies to Amchitka.
+<figure>
+    <a href="{{ "/assets/eots/T1_prebattle_2.png" | uri_escape | absolute_url }}">
+        <img src="{{ "/assets/eots/T1_prebattle_2.png" | uri_escape | absolute_url }}">
+    </a>
+    <figcaption>Situation prior to battle, declared battle hexes</figcaption>
+</figure>
 
-The three other invasions are pretty self-explanatory I think; I take three more resource hexes and make use of the fact that my card is only a 2-card, so he can't react to any of the battle hexes in any way.
+The idea of invading Amchitka is twofold: I want to force him to at least divert some resources to retaking Amchitka. And I want to be able to threaten Midway with a 2OC card. Amchitka is in range of Combined Fleet HQ, exactly 10 hexes away from Midway, and there is no way for the Allies to block supplies to Amchitka.
+
+The three other invasions are pretty self-explanatory I think; I take three more resource hexes and make use of the fact that my card is only a 2OC card, so he can't react to any of the battle hexes in any way.
 
 Tjilatjap was a bit concerning with a total attack strength of 14; so the Allies would be able to hit both battleships and carriers. But thanks to the card event, the total attack strength will drop to 11, minimizing my risks.
 
@@ -126,16 +155,36 @@ Let's see how these battles turn out.
 
 **Battle Resolution**: There are three battle hexes to resolve:
 
-* **Balikpapan** (A) and **Tarakan** (B): Since I only have naval and air units in both battle hexes, I get a +4DRM, which makes both battles an auto win for me.
-* **Tjilatjap** (C): Japan 13 vs. Allies 11. Japan roll +3DRM for surprise attack: 9 for 13 hits and a critical hit. Japan uses the critical hit to destroy the Dutch air unit and remaining 4 hits to reduce US Asia (DD). Allies attack strength is now 6. Allies roll: 1 for 6 hits, no effect (6 hits lost).
+* **Balikpapan** (A) and **Tarakan** (B): Since I only have naval and air units in both battle hexes, I get a +4DRM, which makes both battles an auto-win for me.
+* **Tjilatjap** (C): Japan 13 vs. Allies 11. Japan roll +3DRM for surprise attack: 9 for 13 hits and a critical hit. Japan uses the critical hit to destroy the Dutch air unit and the remaining 4 hits to reduce US Asia (DD). Allies attack strength is now 6. Allies roll: 1 for 6 hits, no effect (6 hits lost).
 
 The invasions of Bangka (2017) and Amchitka (4700) are unopposed and succeed.
 
 **Post Battle Movement**: The Allies have no active unit eligible for PBM, so Japan conducts PBM next.
 
-* Nachi (CA) moves to Miri (2415)
-* Zuiho (CVL) moves back to Davao (3016)
-* Kongo (BB) moves back to Cam Ranh (2311)
+* CA Nachi moves to Miri (2415)
+* CVL Zuiho moves back to Davao (3016)
+* BB Kongo moves back to Cam Ranh (2311)
 * 3rd Air Division moves to Balikpapan (2517)
 
-I took out a total of three naval/air steps, and two ground steps while taking no losses. Further, three more resource hexes. All in all not a bad start, but I have already used four out of seven ASPs, so it's probably time to swing West for the Solomons and New Guinea. 
+<figure>
+    <a href="{{ "/assets/eots/T1_postbattle_2.png" | uri_escape | absolute_url }}">
+        <img src="{{ "/assets/eots/T1_postbattle_2.png" | uri_escape | absolute_url }}">
+    </a>
+    <figcaption>Situation after battle resolution</figcaption>
+</figure>
+
+I took out a total of three naval/air steps, and two ground steps while taking no losses. Further, three more resource hexes. All in all, not a bad start. But I have already used four out of seven ASPs, so it's probably time to swing East for the Solomons and New Guinea.
+
+The battle of Tjilatjap delivered me a lucky punch, I took out his air unit effectively trapping the small fleet that. So any further amphibious assaults won't be in danger of being pushed back by enemy naval units.
+
+I by now assume he's going to play one of his HQs into Australia. He should be able to guess by now that I'm going to swing East. Without an HQ, he won't be able to react and at least annoy me until reinforcements arrive.
+
+
+
+[1]: https://www.gmtgames.com/p-645-empire-of-the-sun-3rd-printing.aspx
+[2]: https://s3-us-west-2.amazonaws.com/gmtwebsiteassets/nneots/EOTSRULES2015v3.pdf
+[3]: https://www.youtube.com/watch?v=JpmWYELBzCU&list=PLDp4C70KgUqaoV4Uw1ApJ96usebj9dtTC
+[4]: https://www.youtube.com/watch?v=CfqEUiHlCVI[5]:
+[5]: https://boardgamegeek.com/boardgame/11825/empire-sun
+[6]: http://www.vassalengine.org/index.php
