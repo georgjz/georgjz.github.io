@@ -176,7 +176,7 @@ The invasions of Bangka (2017) and Amchitka (4700) are unopposed and succeed.
 
 I took out a total of three naval/air steps, and two ground steps while taking no losses. Further, three more resource hexes. All in all, not a bad start. But I have already used four out of seven ASPs, so it's probably time to swing East for the Solomons and New Guinea.
 
-The battle of Tjilatjap delivered me a lucky punch, I took out his air unit effectively trapping the small fleet that. So any further amphibious assaults won't be in danger of being pushed back by enemy naval units.
+The battle of Tjilatjap delivered me a lucky punch, I took out his air unit effectively trapping the small fleet there. So any further amphibious assaults won't be in danger of being pushed back by enemy naval units.
 
 I by now assume he's going to play one of his HQs into Australia. He should be able to guess by now that I'm going to swing East. Without an HQ, he won't be able to react and at least annoy me until reinforcements arrive.
 
