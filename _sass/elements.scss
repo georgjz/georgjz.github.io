@@ -166,9 +166,22 @@ figure {
       }
     }
   }
+  &.quart {
+    @media only screen and (min-width: 62.5em) {
+      img {
+        width: calc(25% - 6px);
+        float: left;
+        margin-left: 1px;
+        margin-right: 1px;
+      }
+      figcaption {
+        clear: left;
+      }
+    }
+  }
 }
 svg:not(:root) {
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 // keyboard tag
