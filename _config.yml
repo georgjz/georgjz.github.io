@@ -3,6 +3,7 @@ title:              Machine Code Construction Yard
 email:              georgjziegler@gmail.com
 bio:                "Blog on machine code programming, vintage computer hardware, game development, and boat building"
 description:        "I do assembly programming on old machines and boat building."
+future:             false 
 reading_time:       true
 words_per_minute:   200
 logo:               'assets/img/logo.png'

@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      "An Empire of The Sun After Action Report"
-date:       2018-11-12
-excerpt:    "I play against the new bot for solitaire play in Empire of The Sun"
+date:       2018-12-21
+excerpt:    "I play against the new version of the bot for solitaire play in Empire of The Sun"
 tags:       [Wargaming, EoTS, Empire of The Sun, aar, after action report]
 feature:    /assets/snesaa/02/saa02_featurecard.gif
 published:  true
@@ -15,7 +15,7 @@ One of my favorite games is [Empire of The Sun][1] by Mark Herman. This game sim
 
 The game ships with a bot called *Erasmus* that is meant to simulate an opponent and as a teaching tool for the game. I decided to take on the [draft of the new *Card Driven Solitaire System*][2] and its [companion cards][3] one fine evening.
 
-I play Japan against the Allied Erasmus. Here you'll find a fast & loose turn 2 I played against it. The idea was to get a quick overview how *Erasmus* works. So please forgive me if I skip any rules or details.
+I play as Japan against the Allied Erasmus. Here you'll find a fast & loose game I played against it. The idea was to get a quick overview of how *Erasmus* works. So please forgive me if I skip any rules or details.
 
 That being said, let's get into it!
 
