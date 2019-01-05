@@ -8,7 +8,6 @@ feature:    /assets/eots/ussarizona.jpg
 published:  true
 comments:   false
 ---
-# DRAFT
 
 ### Introduction
 First post in 2019, so Happy New Year! Besides assembly programming, I love to play wargames. One of my favorite games is [Empire of The Sun][1] by Mark Herman. This game simulates the Pacific Theater of World War II on an operational level. The Japanese must force the US into negotiating a peace treaty by lowering US political will, while the Allies must push back the Japanese and prevent them from taking precious resources that will fuel the Japanese war machine.
