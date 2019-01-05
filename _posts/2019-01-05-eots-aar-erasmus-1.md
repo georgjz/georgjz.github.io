@@ -410,7 +410,7 @@ This is the board situation at the end of turn 2:
     <a href="{{ "/assets/eots/mevserasmus/T1_008_end.png" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/mevserasmus/T1_008_end.png" | uri_escape | absolute_url }}">
     </a>
-    <figcaption>The setup for the 1942 Campaign</figcaption>
+    <figcaption>The board situation at the end of turn 2</figcaption>
 </figure>
 
 So far I'm intrigued by Erasmus. It's a bit weird to get started, but once you have the hang of it, it even behaves (somewhat) logically.
