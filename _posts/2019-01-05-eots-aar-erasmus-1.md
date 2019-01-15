@@ -8,7 +8,6 @@ feature:    /assets/eots/ussarizona.jpg
 published:  true
 comments:   false
 ---
-# DRAFT
 
 ### Introduction
 First post in 2019, so Happy New Year! Besides assembly programming, I love to play wargames. One of my favorite games is [Empire of The Sun][1] by Mark Herman. This game simulates the Pacific Theater of World War II on an operational level. The Japanese must force the US into negotiating a peace treaty by lowering US political will, while the Allies must push back the Japanese and prevent them from taking precious resources that will fuel the Japanese war machine.
@@ -234,13 +233,6 @@ After a fairly good DEI campaign, I turn my attention West. I want to establish 
 * [BB Yamato] moves to Biak (3319), will be a battle hex.
 * [35th Army] and CA Nachi invade Vogelkop (3219) (Use one ASP)
 
-<figure>
-    <a href="{{ "/assets/eots/mevserasmus/T1_002_prebattle_jcard1.png" | uri_escape | absolute_url }}">
-        <img src="{{ "/assets/eots/mevserasmus/T1_002_prebattle_jcard1.png" | uri_escape | absolute_url }}">
-    </a>
-    <figcaption>Situation prior to battle, declared battle hexes</figcaption>
-</figure>
-
 
 **Reactions**: Again, Erasmus follows the same route in the *Reaction* decision matrix. There's nothing to counter the might of the Yamato...*yet*. The Intel roll for the Allies is a 4, so the attack is intercepted.
 
@@ -405,13 +397,13 @@ For the last card, the Allies again play Event Strategy; but since this would be
 
 
 ### Situation End of Turn 2
-This is the board situation at the end of turn 2:
+This is the board situation at the end of turn 2 with attrition phase already done:
 
 <figure>
     <a href="{{ "/assets/eots/mevserasmus/T1_008_end.png" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/mevserasmus/T1_008_end.png" | uri_escape | absolute_url }}">
     </a>
-    <figcaption>The setup for the 1942 Campaign</figcaption>
+    <figcaption>The board situation at the end of turn 2</figcaption>
 </figure>
 
 So far I'm intrigued by Erasmus. It's a bit weird to get started, but once you have the hang of it, it even behaves (somewhat) logically.
