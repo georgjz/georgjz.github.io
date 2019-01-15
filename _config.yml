@@ -54,7 +54,6 @@ tumblr:             georgsyard
 #youtube-channel:   channel
 
 # Gems
-# gems:
 plugins:
   - jekyll-mentions
   - jekyll-feed
