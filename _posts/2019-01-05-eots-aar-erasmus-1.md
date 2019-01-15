@@ -233,13 +233,6 @@ After a fairly good DEI campaign, I turn my attention West. I want to establish 
 * [BB Yamato] moves to Biak (3319), will be a battle hex.
 * [35th Army] and CA Nachi invade Vogelkop (3219) (Use one ASP)
 
-<figure>
-    <a href="{{ "/assets/eots/mevserasmus/T1_002_prebattle_jcard1.png" | uri_escape | absolute_url }}">
-        <img src="{{ "/assets/eots/mevserasmus/T1_002_prebattle_jcard1.png" | uri_escape | absolute_url }}">
-    </a>
-    <figcaption>Situation prior to battle, declared battle hexes</figcaption>
-</figure>
-
 
 **Reactions**: Again, Erasmus follows the same route in the *Reaction* decision matrix. There's nothing to counter the might of the Yamato...*yet*. The Intel roll for the Allies is a 4, so the attack is intercepted.
 
