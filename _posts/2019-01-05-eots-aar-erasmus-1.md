@@ -397,7 +397,7 @@ For the last card, the Allies again play Event Strategy; but since this would be
 
 
 ### Situation End of Turn 2
-This is the board situation at the end of turn 2:
+This is the board situation at the end of turn 2 with attrition phase already done:
 
 <figure>
     <a href="{{ "/assets/eots/mevserasmus/T1_008_end.png" | uri_escape | absolute_url }}">
