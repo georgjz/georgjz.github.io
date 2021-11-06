@@ -18,7 +18,7 @@ As avid readers may have noticed, I like assembly programming. I've several time
 
 All these endeavors all ended in frustration. Most of the time, for the same reason: I found the available tools to be inadequate to my needs. This is not to say that they're bad. They're well designed and for the most part, do what they advertise they do - assemble code for cross-platform development.
 
-But I find myself longing for the simple assembler-linker combination cc65 offers. I think .include and .org instructions (and their cousins) are horrible; they make modularity harder to achieve, prevent you from taking advantage of concepts like relocatable code, re-entrant subroutine design, etc.
+But I find myself longing for the simple assembler-linker combination cc65 offers. I think `.include` and `.org` instructions (and their cousins) are horrible; they make modularity harder to achieve, prevent you from taking advantage of concepts like relocatable code, re-entrant subroutine design, etc.
 
 I think assembler-linker combinations are preferable to assemblers that obfuscate code by introducing assembler directives into the code that do not affect the functionality of the code at all - you don't write your makefile into your C/C++ headers, so why is it okay to do so with assembly code?
 
