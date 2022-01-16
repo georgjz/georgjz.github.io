@@ -43,7 +43,7 @@ Let's look at a simple example. Suppose we have this input source stream:
 
 ```
 Start:
-    lda  a, 12
+    mov  a, 12
     inc  a
     inc  a
 ```
@@ -52,14 +52,14 @@ We want to turn this into a stream of lexemes. Depending on how we define our sy
 
 ```
 <Identifier, "Start">
-<Mnemonic, "lda">
-<RegisterOperand, "A">
+<Mnemonic, "mov">
+<Register, "A">
 <Comma>
 <UnsignedInteger, 12>
 <Mnemonic, "inc">
-<RegisterOperand, "A">
+<Register, "A">
 <Mnemonic, "inc">
-<RegisterOperand, "A">
+<Register, "A">
 ```
 
 Note how the scanner simply *mechanically* translates the input stream into lexemes. We're not interested yet in checking whether this program is valid or not ("is it a legal command to increment register A?"). That's the parser's job in the next section.
@@ -68,10 +68,10 @@ Another important thing to note is that the *attribute value* is not always nece
 
 ```
 <Identifier, "Start">
-<LDAMnemonic>
+<MOVMnemonic>
 <RegisterOperand, "A">
 <Comma>
-<UnsignedInteger, 4>
+<UnsignedInteger, 12>
 <INCMnemonic>
 <RegisterOperand, "A">
 <INCMnemonic>
@@ -98,7 +98,7 @@ Line       -> Identifier :
            |  Mnemonic Register
            |  Mnemonic Register , Number
 
-Mnemonic   -> lda
+Mnemonic   -> mov
            |  inc
 
 Register   -> a
@@ -112,15 +112,27 @@ Again, this is very simplified for demonstration purposes. We'll go into more de
 
 `Program` is called the *start symbol* of our CFG. This will be the root of the AST we're going to build. In essence, the problem we're trying to solve can be visualized thus:
 
-
+<figure>
+    <a href="{{ "/assets/wynvern/02_ast_unparsed.png" | absolute_url }}">
+        <img src="{{ "/assets/wyvern/02_ast_unparsed.png" | absolute_url }}">
+    </a>
+    <figcaption>Abstract Syntax Tree to be constructed</figcaption>
+</figure>
 
 In essence, we're trying to build a tree with the start symbol as its root and the lexeme stream (produced by the scanner) as its leaves. There are two basic strategies employed: [top-down parsing][tdp] and [bottom-up parsing][bup]. Both methods have their pros and cons, it is a [huge field of study]() too big to cover here. Suffice to say, I'll cover [recursive descent parsing](https://en.wikipedia.org/wiki/Recursive_descent_parser) and [parser combinators](https://en.wikipedia.org/wiki/Parser_combinator) in a later article since this is what Wyvern will use.
 
 Once our parser has run, we should have a tree structure that represents our program:
 
-
+<figure>
+    <a href="{{ "/assets/wynvern/02_ast_parsed.png" | absolute_url }}">
+        <img src="{{ "/assets/wyvern/02_ast_parsed.png" | absolute_url }}">
+    </a>
+    <figcaption>Abstract Syntax Tree after the parser has run</figcaption>
+</figure>
 
 If the parser is unable to construct an AST from the lexeme stream, then the syntactical analysis has failed - that's the `SYNTAX ERROR!` your compiler keeps yelling at you about.
+
+Mind that this is very simplified. We haven't seen anything resembling subroutines, conditionals, macros, etc. We'll cover these more advanced topics when we construct the CFG for our assembler.
 
 Finally, the generator will turn our AST into the object file we want.
 
@@ -130,6 +142,13 @@ The final step in the assembler is *code generation*, also [*semantic analysis*]
 
 (In terms of compiler design, this would be the step where the *intermediate representation* would be generated which would be passed to the backend of the compiler - which would then in turn generate the assembly and machine code. We can "skip" that since we already have the assembly code.)
 
+This is (for now at least) a rather mechanical step that is easier explained when we get to the actual implementation. Just remember that the generator will turn the abstract syntax tree into the ELF file the linker will then use to put together the final binary.
+
+## Conclusion
+
+This was a basic overview how the three main parts of the assember - scanner, parser, generator - will work. We've seen how those three parts will interact, the input they process and the output they'll produce.
+
+Next time, we'll look in greater detail how the linker will work.
 
 
 [wyvern01]: https://cc65.github.io/doc/
