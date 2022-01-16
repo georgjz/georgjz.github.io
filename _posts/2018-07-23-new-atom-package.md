@@ -6,6 +6,7 @@ excerpt: "Learn about a new Atom grammar package for the Intel 8080"
 tags: [programming, atom, intel 8080, project ideas, 6502]
 comments: true
 ---
+
 [Atom][1] is one of my favorite tools. I use it for pretty much
 for anything that involves coding or writing(I'm writing this in Atom right
 now).

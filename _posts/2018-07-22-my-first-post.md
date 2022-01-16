@@ -6,6 +6,7 @@ excerpt: "By the pricking of my thumbs // Something wicked this way comes"
 tags: [first post, blogging, about me]
 comments: true
 ---
+
 So, I finally decided to start a personal blog. The main motivation being that I'd like to have a way (to force myself) to document the stuff and projects I do. My interests mainly revolve around assembly/machine code programming and old gaming hardware, my favorites being the SNES, Playstation, Sega Saturn.
 
 My affection for console programming started the Christmas I got my PlayStation 2. If you live in the PAL region, you might remember the Demo CD that came bundled with it. On this CD, there was a version of the YABASIC interpreter. You could write simple BASIC code and run it on your PS2. I was completely blown away by this. I don't remember if I got any games with it, but I do remember spending the first weeks with my PS2 "tipping" code into the simple editor with a controller(a controller!) and running it on the console.

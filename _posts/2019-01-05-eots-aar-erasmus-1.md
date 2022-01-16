@@ -9,7 +9,8 @@ published:  true
 comments:   false
 ---
 
-### Introduction
+## Introduction
+
 First post in 2019, so Happy New Year! Besides assembly programming, I love to play wargames. One of my favorite games is [Empire of The Sun][1] by Mark Herman. This game simulates the Pacific Theater of World War II on an operational level. The Japanese must force the US into negotiating a peace treaty by lowering US political will, while the Allies must push back the Japanese and prevent them from taking precious resources that will fuel the Japanese war machine.
 
 The game ships with a bot called *Erasmus* that is meant to simulate an opponent and as a teaching tool for the game. I decided to take on the [draft of the new *Card Driven Solitaire System*][2] and its [companion cards][3] one fine evening. (You have to be a member and logged into boardgamegeek to view these files)
@@ -18,7 +19,8 @@ I play as Japan against the Allied Erasmus. Here you'll find a fast & loose game
 
 That being said, let's get into it!
 
-### Setup
+## Setup
+
 For simplicity, I play the 1942 Campaign.
 
 <figure>
@@ -66,7 +68,8 @@ And here's the opening hand of the Allies:
 
 Not very impressive opening hands, let's see where this takes us.
 
-### Japan Card 1: *VADM Kondo* (\#47) as EC
+## Japan Card 1: *VADM Kondo* (\#47) as EC
+
 <figure>
     <a href="{{ "/assets/eots/cards/japanese cards47.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/japanese cards47.gif" | uri_escape | absolute_url }}">
@@ -116,7 +119,8 @@ Dutch CL unit conducts Naval Emergency Movement to Tjilatjap (2019).
 * All other naval and air units stay where they are; CVL Ryujo prevents the units in Tjilatjap (2019) from being activated.
 
 
-### Allies Card 1: *Arcadia Conference* (\#4) as EC
+## Allies Card 1: *Arcadia Conference* (\#4) as EC
+
 <figure>
     <a href="{{ "/assets/eots/cards/allied cards04.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/allied cards04.gif" | uri_escape | absolute_url }}">
@@ -131,7 +135,8 @@ Here Erasmus uses the *Axis of Determination* to plot its first move, you can fi
 As per the strategy box, we move ABDA HQ into Kendari.
 
 
-### Japan Card 2: *Central Force* (\#59) as EC
+## Japan Card 2: *Central Force* (\#59) as EC
+
 <figure>
     <a href="{{ "/assets/eots/cards/japanese cards59.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/japanese cards59.gif" | uri_escape | absolute_url }}">
@@ -171,7 +176,8 @@ As per card event, I took Medan (1813) with paratroopers, destroying the 2nd Dut
 </figure>
 
 
-### Allies Card 2: *'Vinegar' Joe Stilwell* (\#7) as EC
+## Allies Card 2: *'Vinegar' Joe Stilwell* (\#7) as EC
+
 <figure>
     <a href="{{ "/assets/eots/cards/allied cards07.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/allied cards07.gif" | uri_escape | absolute_url }}">
@@ -216,7 +222,8 @@ Erasmus plays *'Vinegar' Joe Stilwell* (\#7) as EC.
 </figure>
 
 
-### Japan Card 3: *Indian Worker's Strike* (\#82) as OC
+## Japan Card 3: *Indian Worker's Strike* (\#82) as OC
+
 <figure>
     <a href="{{ "/assets/eots/cards/japanese cards82.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/japanese cards82.gif" | uri_escape | absolute_url }}">
@@ -249,7 +256,8 @@ Dutch CL unit conducts Naval Emergency Movement to Tjilatjap (2019).
 I have a foothold on New Guinea, and invaded Alaska. I probably won't hold Alaska, but it will force Erasmus to react to it, might spent 1 or even 2 cards on it just so he doesn't lose 1 Political Will over it (also, I wanna see if Alaska is accounted for in the Allied version of Erasmus).
 
 
-### Allies Card 3: *PT Boats* (\#23) as OC
+## Allies Card 3: *PT Boats* (\#23) as OC
+
 <figure>
     <a href="{{ "/assets/eots/cards/allied cards23.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/allied cards23.gif" | uri_escape | absolute_url }}">
@@ -282,7 +290,8 @@ The CBI Defense is now set.
 </figure>
 
 
-### Japan Card 4: *Minor Axis Victory* (\#57) as OC
+## Japan Card 4: *Minor Axis Victory* (\#57) as OC
+
 <figure>
     <a href="{{ "/assets/eots/cards/japanese cards57.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/japanese cards57.gif" | uri_escape | absolute_url }}">
@@ -293,7 +302,8 @@ The CBI Defense is now set.
 I reduce the *War in Europe* status by 2.
 
 
-### Allies Card 4: *Edwin Booz* (\#18) as EC
+## Allies Card 4: *Edwin Booz* (\#18) as EC
+
 <figure>
     <a href="{{ "/assets/eots/cards/allied cards18.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/allied cards18.gif" | uri_escape | absolute_url }}">
@@ -310,7 +320,8 @@ By now you know the drill, Erasmus uses the *Axis of Determination*:
 Erasmus gains one ASP.
 
 
-### Japan Card 5: *JN25 Code Change* (\#70) as OC
+## Japan Card 5: *JN25 Code Change* (\#70) as OC
+
 <figure>
     <a href="{{ "/assets/eots/cards/japanese cards70.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/japanese cards70.gif" | uri_escape | absolute_url }}">
@@ -328,13 +339,14 @@ I continue my conquest of New Guinea.
 There are no legal reactions for the Allies. So all is good (for the Japanese).
 
 
-### Allies Card 5: Pass
+## Allies Card 5: Pass
 
 **A**: No <span>&#8594;</span>
 **F**: Yes and **G**: Yes <span>&#8594;</span> Pass
 
 
-### Japan Card 6: *Col. Tsugi* (\#3) as OC
+## Japan Card 6: *Col. Tsugi* (\#3) as OC
+
 <figure>
     <a href="{{ "/assets/eots/cards/japanese cards03.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/japanese cards03.gif" | uri_escape | absolute_url }}">
@@ -366,13 +378,14 @@ Erasmus Intel roll: 9! Woo, a surprise attack!
     <figcaption>Siuation after battle</figcaption>
 </figure>
 
-### Allies Card 6: Pass
+## Allies Card 6: Pass
 
 **A**: No <span>&#8594;</span>
 **F**: Yes and **G**: Yes <span>&#8594;</span> Pass
 
 
-### Japan Card 7: *Tokyo Rose* (\#74) as EC
+## Japan Card 7: *Tokyo Rose* (\#74) as EC
+
 <figure>
     <a href="{{ "/assets/eots/cards/japanese cards74.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/japanese cards74.gif" | uri_escape | absolute_url }}">
@@ -385,7 +398,8 @@ Here I realised a mistake: I wanted to invade Guadalcanal next, but it is beyond
 So I play for the event and reduce US Political Will by one to seven.
 
 
-### Allies Card 7: *China Offensive* (\#82) as FOQ
+## Allies Card 7: *China Offensive* (\#82) as FOQ
+
 <figure>
     <a href="{{ "/assets/eots/cards/allied cards82.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/eots/cards/allied cards82.gif" | uri_escape | absolute_url }}">
@@ -396,7 +410,8 @@ So I play for the event and reduce US Political Will by one to seven.
 For the last card, the Allies again play Event Strategy; but since this would be pointless, I decide to save this card as future offensive card.
 
 
-### Situation End of Turn 2
+## Situation End of Turn 2
+
 This is the board situation at the end of turn 2 with attrition phase already done:
 
 <figure>
