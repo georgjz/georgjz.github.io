@@ -151,13 +151,13 @@ This was a basic overview how the three main parts of the assember - scanner, pa
 Next time, we'll look in greater detail how the linker will work.
 
 
-[wyvern01]: https://cc65.github.io/doc/
-[z80]: https://cc65.github.io/doc/
-[6502]: https://cc65.github.io/doc/
-[68k]: https://cc65.github.io/doc/
-[6809]: https://cc65.github.io/doc/
-[elf]: https://cc65.github.io/doc/
-[elfhs]: https://cc65.github.io/doc/
+[wyvern01]: {% post_url wyvern/2018-08-02-snesaa02 %}
+[z80]: https://en.wikipedia.org/wiki/Zilog_Z80
+[6502]: https://en.wikipedia.org/wiki/MOS_Technology_6502
+[68k]: https://en.wikipedia.org/wiki/Motorola_68000
+[6809]: https://en.wikipedia.org/wiki/Motorola_6809
+[elf]: https://en.wikipedia.org/wiki/Executable_and_Linkable_Format
+[elfhs]: https://hackage.haskell.org/package/elf-0.31/docs/Data-Elf.html
 [lex]: https://en.wikipedia.org/wiki/Lexical_analysis
 [ast]: https://en.wikipedia.org/wiki/Abstract_syntax_tree
 [syn]: https://en.wikipedia.org/wiki/Parsing
