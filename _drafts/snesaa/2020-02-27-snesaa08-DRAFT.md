@@ -21,7 +21,7 @@ This time, we'll read the joypad and move the sprite accordingly. So this time w
     <a href="{{ "/assets/snesaa/08/saa08_titlecard.gif" | uri_escape | absolute_url }}">
         <img src="{{ "/assets/snesaa/08/saa08_titlecard.gif" | uri_escape | absolute_url }}">
     </a>
-    <figcaption>I forgot the Subroutine Badge again...patience</figcaption>
+    <figcaption>You earned the subroutine badge!</figcaption>
 </figure>
 
 ## Reading The Joypad
@@ -217,9 +217,7 @@ Congratulations! Your first moving sprites!
 
 There was a lot of new stuff here, so make sure to study the code examples closely. I'd also encourage you to experiment a bit. Can you make the sprites bounce only on the right half of the screen? Can you modulize the game logic code with subroutines? Make each sprite move and bounce individually? Bounce off each other? Challenge yourself!
 
-Next time, we'll learn how to read the joypad and make the sprites react to your input.
-
-Lastly, I'm very sorry this update took so long; I've been working on a few other things but I'm determined to return to a weekly Thursday schedule as promised. Your feedback is much appreciated and a huge motivation! Stay tuned!
+[Next time][2], we'll learn how to read the joypad and make the sprites react to your input.
 
 ## Links and References
 

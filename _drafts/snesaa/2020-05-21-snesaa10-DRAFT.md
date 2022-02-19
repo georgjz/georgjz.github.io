@@ -1,0 +1,56 @@
+---
+layout:     post
+title:      "SNES Assembly Adventure 10: Background Modes"
+date:       2020-05-21
+excerpt:    "Learn how to better structure your project and code to make it more reusable"
+tags:       [SNES Assembly Adventure, assembly, programming, SNES, tutorial]
+feature:    /assets/snesaa/10/saa10_featurecard.png
+published:  true
+comments:   true
+---
+
+Welcome back, Adventurer! [Last time][1], we learned a bit more about direct memory access and moving sprites.
+
+This time, we'll read the joypad and move the sprite accordingly. So this time we will
+
+* read and process input from the joypad
+* make the sprite move according to input
+* implement some simple collision detection to make the sprite stay on screen
+
+<figure>
+    <a href="{{ "/assets/snesaa/10/saa10_titlecard.gif" | uri_escape | absolute_url }}">
+        <img src="{{ "/assets/snesaa/10/saa10_titlecard.gif" | uri_escape | absolute_url }}">
+    </a>
+    <figcaption>You earned the subroutine badge!</figcaption>
+</figure>
+
+## Reading The Joypad
+
+
+## Conclusion
+
+There was a lot of new stuff here, so make sure to study the code examples closely. I'd also encourage you to experiment a bit. Can you make the sprites bounce only on the right half of the screen? Can you modulize the game logic code with subroutines? Make each sprite move and bounce individually? Bounce off each other? Challenge yourself!
+
+[Next time][2], we'll learn how to read the joypad and make the sprites react to your input.
+
+Lastly, I'm very sorry this update took so long; I've been working on a few other things but I'm determined to return to a weekly Thursday schedule as promised. Your feedback is much appreciated and a huge motivation! Stay tuned!
+
+## Links and References
+
+* A good [explanation of DMA][6] from the Super Famicom Development Wiki
+* A detailed [explanation of OAMRAM][9] from the same Wiki
+* Retro Game Machines Explained has an [excellent series of videos][7] explaining how the SNES works, I can't recommend them enough!
+* [A short explanation][8] of indirect and indexed addressing
+* [This post][5] on NES Doug's excellent blog explains the basic idea behind metasprites
+
+
+[1]: {% post_url snesaa/2020-04-09-snesaa09 %}
+[2]: {% post_url snesaa/2020-07-02-snesaa11 %}
+[3]: http://www.westerndesigncenter.com/wdc/documentation/w65c816s.pdf
+[4]: http://codebase64.org/doku.php?id=base:two_s_complement_system
+[5]: https://nesdoug.com/2018/09/05/06-sprites/
+[6]: https://wiki.superfamicom.org/grog's-guide-to-dma-and-hdma-on-the-snes
+[7]: www.youtube.com/watch?v=K7gWmdgXPgk
+[8]: https://www.cs.helsinki.fi/u/kerola/tito/koksi_doc/memaddr.html
+[9]: https://wiki.superfamicom.org/snes-sprites
+
