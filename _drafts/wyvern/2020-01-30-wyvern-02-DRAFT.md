@@ -12,7 +12,7 @@ comments:   true
 
 ## Architecture Overview
 
-[Last time][wyvern01], I wrote about my motivation to create a new assembly toolchain for cross-development targeting older architectures like [Z80][z80] or [6502][6052]. In this article, I'll describe the overall architecture of Wyvern. How it will deviate from classical multi-pass assemblers and why. I'll just start with Z80 for the beginning, but I want ultimately support [68k][68k] and [6809][6809] for some platforms I'd like to target someday.
+[Last time][wyvern01], I wrote about my motivation to create a new assembly toolchain for cross-development targeting older architectures like [Z80][z80] or [6502][6502]. In this article, I'll describe the overall architecture of Wyvern. How it will deviate from classical multi-pass assemblers and why. I'll just start with Z80 for the beginning, but I want ultimately support [68k][68k] and [6809][6809] for some platforms I'd like to target someday.
 
 <figure>
     <a href="{{ "/assets/wyvern/01_basic_overview.png" | absolute_url }}">
@@ -151,7 +151,8 @@ This was a basic overview how the three main parts of the assember - scanner, pa
 Next time, we'll look in greater detail how the linker will work.
 
 
-[wyvern01]: {% post_url wyvern/2018-08-02-snesaa02 %}
+[wyvern01]: {% post_url wyvern/2020-01-02-wyvern-01 %}
+[wyvern03]: {% post_url wyvern/2020-03-13-wyvern-03 %}
 [z80]: https://en.wikipedia.org/wiki/Zilog_Z80
 [6502]: https://en.wikipedia.org/wiki/MOS_Technology_6502
 [68k]: https://en.wikipedia.org/wiki/Motorola_68000
@@ -163,3 +164,5 @@ Next time, we'll look in greater detail how the linker will work.
 [syn]: https://en.wikipedia.org/wiki/Parsing
 [cfg]: https://en.wikipedia.org/wiki/Context-free_grammar
 [sem]: https://en.wikipedia.org/wiki/Compiler#Front_end
+[tdp]: https://en.wikipedia.org/wiki/Top-down_parsing
+[bup]: https://en.wikipedia.org/wiki/Bottom-up_parsing
