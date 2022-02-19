@@ -4,7 +4,7 @@ title:      "An Empire of The Sun After Action Report, Part 1"
 date:       2018-11-02
 excerpt:    "The Imperial Japanese Forces start their conquest of the West and South Pacific"
 tags:       [Wargaming, EoTS, Empire of The Sun, aar, after action report]
-feature:    /assets/snesaa/02/saa02_featurecard.gif
+feature:    /assets/snesaa/02/snesaa02_featurecard.gif
 published:  true
 comments:   true
 ---
