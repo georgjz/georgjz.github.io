@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "How to Write An Assembler in Haskell, Part 6"
-date:       2020-01-16
+title:      "How to Write An Assembler in Haskell, Part 3"
+date:       2020-02-13
 excerpt:    "Takes a look at the unique challenges of describing an assembly language as context-free grammar"
 tags:       [programming, Z80, assembler, tutorial, Haskell, context-free grammar]
 feature:    /assets/snesaa/02/saa02_featurecard.gif

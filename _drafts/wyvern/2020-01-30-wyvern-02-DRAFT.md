@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "How to Write An Assembler in Haskell, Part 2"
-date:       2020-01-09
+date:       2020-01-30
 excerpt:    "Gives an architectural overview of the Wyvern toolchain"
 tags:       [programming, Z80, assembler, tutorial, Haskell, Wyvern]
 feature:    /assets/snesaa/02/saa02_featurecard.gif

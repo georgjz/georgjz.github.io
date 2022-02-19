@@ -18,7 +18,7 @@ $color_fuscous_gray  : #555;
 $color_alabaster     : #fcfcfc;
 $color_celeste       : #ccc;
 $color_pink_swan     : #bbb;
-$comp-color 	     : complement(#222); 
+$comp-color 	     : complement(#222);
 
 //button colors
 $success			 : #5cb85c;
@@ -27,8 +27,8 @@ $danger				 : #C64537;
 $info		         : #308cbc;
 
 //fonts
-$font1               : Fira Sans,sans-serif;
-$font2               : Inconsolata;
+$font1               : 'Fira Sans',sans-serif;
+$font2               : 'Robot Mono', monospace;
 $alt-font            : serif;
 $doc-font-size       : 16;
 $doc-line-height     : 26;

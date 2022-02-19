@@ -1,32 +1,30 @@
 ---
 layout:     post
 title:      "SNES Assembly Adventure 08: Reading and Handling Input"
-date:       2019-05-30
-excerpt:    "Learn how to read from the SNES input pad and detect button presses"
+date:       2020-02-27
+excerpt:    "Learn how to read from the SNES joypad and detect button presses"
 tags:       [SNES Assembly Adventure, assembly, programming, SNES, tutorial]
-feature:    /assets/snesaa/07/saa07_featurecard.png
-published:  false
+feature:    /assets/snesaa/08/saa08_featurecard.png
+published:  true
 comments:   true
 ---
-Welcome back, Adventurer! [Last time][1], we learned a bit more about subroutines and how to pass arguments to them.
 
-This time, we'll see this in more concrete action and
+Welcome back, Adventurer! [Last time][1], we learned a bit more about direct memory access and moving sprites.
 
-* revisit the sprite demo from [part 4][2]
-* make the code more reusable by replacing some sections with subroutines
-* move data from WRAM to OAMRAM with DMA, or *Direct Memory Access*
-* make the sprites move and bounce off the screen boundaries
+This time, we'll read the joypad and move the sprite accordingly. So this time we will
 
-So lots to get to. Let's get started!
+* read and process input from the joypad
+* make the sprite move according to input
+* implement some simple collision detection to make the sprite stay on screen
 
 <figure>
-    <a href="{{ "/assets/snesaa/07/saa07_titlecard.gif" | uri_escape | absolute_url }}">
-        <img src="{{ "/assets/snesaa/07/saa07_titlecard.gif" | uri_escape | absolute_url }}">
+    <a href="{{ "/assets/snesaa/08/saa08_titlecard.gif" | uri_escape | absolute_url }}">
+        <img src="{{ "/assets/snesaa/08/saa08_titlecard.gif" | uri_escape | absolute_url }}">
     </a>
-    <figcaption>I forgot the Subroutine Badge, you'll be awarded it next time</figcaption>
+    <figcaption>I forgot the Subroutine Badge again...patience</figcaption>
 </figure>
 
-### Sprite Demo Revisited
+## Reading The Joypad
 
 Let's look at the sprite demo code again:
 
@@ -46,7 +44,7 @@ But there's still room for improvement. In `LoadVRAM`, we use the label `SpriteD
 
 But thankfully, there's a solution.
 
-### Passing Addresses as Arguments
+## Passing Addresses as Arguments
 
 [Last time][1], we learned how to pass arguments to subroutines. We'll use this now to improve `LoadVRAM`. So, what information does the subroutine needs to perform its task? In essence, it needs three bits (*no pun intended*) of information:
 
@@ -99,7 +97,7 @@ If you're struggling with *Stack Relative Indirect Indexed Addressing*, check ou
 
 The rest of the code hasn't changed so far. Now, if you think the code in `LoadOAMRAM` looks a bit ugly and inefficient, you're are right. We'll now finally add some action by making the sprites move each frame and bounce off the screen boundaries.
 
-### Make the Sprites Move and Bounce
+## Make the Sprites Move and Bounce
 
 Let's finally add some action to this demo! Before we start, here are a few things to keep in mind to understand the code in this section:
 
@@ -215,7 +213,7 @@ If you build this code and run it in your emulator, this is what you should see:
 
 Congratulations! Your first moving sprites!
 
-### Conclusion
+## Conclusion
 
 There was a lot of new stuff here, so make sure to study the code examples closely. I'd also encourage you to experiment a bit. Can you make the sprites bounce only on the right half of the screen? Can you modulize the game logic code with subroutines? Make each sprite move and bounce individually? Bounce off each other? Challenge yourself!
 
@@ -223,7 +221,7 @@ Next time, we'll learn how to read the joypad and make the sprites react to your
 
 Lastly, I'm very sorry this update took so long; I've been working on a few other things but I'm determined to return to a weekly Thursday schedule as promised. Your feedback is much appreciated and a huge motivation! Stay tuned!
 
-### Links and References
+## Links and References
 
 * A good [explanation of DMA][6] from the Super Famicom Development Wiki
 * A detailed [explanation of OAMRAM][9] from the same Wiki
@@ -232,7 +230,7 @@ Lastly, I'm very sorry this update took so long; I've been working on a few othe
 * [This post][5] on NES Doug's excellent blog explains the basic idea behind metasprites
 
 
-[1]: {% post_url snesaa/2019-02-21-snesaa06 %}
+[1]: {% post_url snesaa/2019-05-30-snesaa07 %}
 [2]: {% post_url snesaa/2018-09-21-snesaa04 %}
 [3]: http://www.westerndesigncenter.com/wdc/documentation/w65c816s.pdf
 [4]: http://codebase64.org/doku.php?id=base:two_s_complement_system
