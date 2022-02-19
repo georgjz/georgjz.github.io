@@ -18,8 +18,6 @@
 - [ ] SAA03:
   - [ ] Fix error in color palette example
   - [ ] Fix Link gif
-- [ ] SAA04:
-  - [ ] Add note about example not working in Mesen
 
 ## Wyvern
 
