@@ -18,6 +18,8 @@
 - [ ] SAA03:
   - [ ] Fix error in color palette example
   - [ ] Fix Link gif
+- [ ] SAA07:
+  - [ ] Fix bug to move sprites off-screen
 
 ## Wyvern
 
