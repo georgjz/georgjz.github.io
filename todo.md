@@ -18,8 +18,8 @@
 - [ ] SAA03:
   - [ ] Fix error in color palette example
   - [ ] Fix Link gif
-- [ ] SAA04:
-  - [ ] Add note about example not working in Mesen
+- [ ] SAA07:
+  - [ ] Fix bug to move sprites off-screen
 
 ## Wyvern
 
