@@ -3,6 +3,7 @@
 ## General
 
 - [ ] Fix markdown formatting
+  - [ ] Better integration of partial Gists
 - [ ] Add series header
 - [ ] Disqus replacement
 
