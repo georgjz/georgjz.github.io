@@ -3,6 +3,7 @@
 ## General
 
 - [ ] Fix markdown formatting
+  - [ ] Better integration of partial Gists
 - [ ] Add series header
 - [ ] Disqus replacement
 
@@ -16,8 +17,8 @@
 - [ ] SAA02:
   - [ ] Give stepping example
 - [ ] SAA03:
-  - [ ] Fix error in color palette example
-  - [ ] Fix Link gif
+  - [x] Fix error in color palette example
+  - [x] Fix Link gif
 - [ ] SAA07:
   - [ ] Fix bug to move sprites off-screen
 
