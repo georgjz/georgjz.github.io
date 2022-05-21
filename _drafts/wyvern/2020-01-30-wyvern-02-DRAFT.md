@@ -151,7 +151,7 @@ This was a basic overview how the three main parts of the assember - scanner, pa
 Next time, we'll look in greater detail how the linker will work.
 
 
-[wyvern01]: {% post_url wyvern/2020-01-02-wyvern-01 %}
+[wyvern01]: {% post_url wyvern/2022-03-10-wyvern-01 %}
 [wyvern03]: {% post_url wyvern/2020-02-13-wyvern-03-DRAFT %}
 [z80]: https://en.wikipedia.org/wiki/Zilog_Z80
 [6502]: https://en.wikipedia.org/wiki/MOS_Technology_6502
