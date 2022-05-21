@@ -4,6 +4,7 @@
 
 - [ ] Fix markdown formatting
   - [ ] Better integration of partial Gists
+  - [ ] Forth, asm highlighting
 - [ ] Add series header
 - [ ] Disqus replacement
 
@@ -16,7 +17,7 @@
   - [ ] Add build instructions for WSL2
 - [ ] SAA02:
   - [ ] Give stepping example
-- [ ] SAA03:
+- [x] SAA03:
   - [x] Fix error in color palette example
   - [x] Fix Link gif
 - [ ] SAA07:
