@@ -1,9 +1,9 @@
 ---
 layout:     post
-title:      "How to Write An Assembler in Haskell, Part 2"
-date:       2020-01-30
+title:      "How to Write An Assembler in Racket, Part 2: Architecture Overview"
+date:       2022-09-20
 excerpt:    "Gives an architectural overview of the Wyvern toolchain"
-tags:       [programming, Z80, assembler, tutorial, Haskell, Wyvern]
+tags:       [programming, 6502, Z80, assembler, tutorial, Racket, Wyvern]
 feature:    /assets/snesaa/02/snesaa02_featurecard.gif
 published:  true
 comments:   true
@@ -12,7 +12,7 @@ comments:   true
 
 ## Architecture Overview
 
-[Last time][wyvern01], I wrote about my motivation to create a new assembly toolchain for cross-development targeting older architectures like [Z80][z80] or [6502][6502]. In this article, I'll describe the overall architecture of Wyvern. How it will deviate from classical multi-pass assemblers and why. I'll just start with Z80 for the beginning, but I want ultimately support [68k][68k] and [6809][6809] for some platforms I'd like to target someday.
+[Last time][wyvern01], I wrote about my motivation to create a new assembly toolchain for cross-development targeting older architectures like [Z80][z80] or [6502][6502]. In this article, I'll describe the overall architecture of Wyvern. How it will deviate from classical multi-pass assemblers and why. I'll just start with 65C02 as it is a small enough instruction set that I can present as a whole here. But I want ultimately support (including but not limited to) [Z80][z80], [68k][68k] and [6809][6809] for some platforms I'd like to target someday.
 
 <figure>
     <a href="{{ "/assets/wyvern/01_basic_overview.png" | absolute_url }}">
@@ -27,9 +27,9 @@ In this article, we'll mainly talk about the assembler, the linker will have to 
 
 ## The Assembler
 
-The main job of the assembler is to take a (hopefully, valid) input file and turn it into an object file. As target format, I plan to use [ELF][elf], since there's already a [Haskell library][elfhs] that implements most of the functionality I'll need. The linker will then take said object files to create the final binary.
+The main job of the assembler is to take a (hopefully, valid) input file and turn it into an object file. As target format, I plan to use [ELF][elf]. The linker will then take said object files to create the final binary.
 
-The assembler is made up of three basic parts and the symbol table, which is a bit special and will have its section:
+The assembler is made up of three basic parts and the symbol table, which is a bit special and will have its own section:
 
 Keep in mind this is just a high-level overview. We'll look at each part's functionality in more detail once we start implementing them. Let's look at all three stages individually.
 
@@ -37,7 +37,7 @@ Keep in mind this is just a high-level overview. We'll look at each part's funct
 
 The *scanner*'s job is to take an input stream of characters (aka, the source file) and turn it into a stream of *lexemes*. This step in a compiler toolchain is generally called [lexical analysis][lex]. The scanner is sometimes also-called *lexer* or *tokenizer*. The goal is to group characters into lexemes that the next step, the parser, can understand.
 
-A lexeme is a tuple made up of a *token type* and an *attribute* or *token value*, we'll represent this simply as `<token-type, attribute-value>` (to avoid confusion, I purposefully use angled brackets here to keep tuples as a concept distinct from Haskell's tuple type `(, )`). *Token types* can be syntactical categories like *identifier*, *number*, *function call*, etc.
+A lexeme is a tuple made up of a *token type* and an *attribute* or *token value*, we'll represent this simply as `<token-type, attribute-value>`. *Token types* can be syntactical categories like *identifier*, *number*, *function call*, etc.
 
 Let's look at a simple example. Suppose we have this input source stream:
 
@@ -64,7 +64,7 @@ We want to turn this into a stream of lexemes. Depending on how we define our sy
 
 Note how the scanner simply *mechanically* translates the input stream into lexemes. We're not interested yet in checking whether this program is valid or not ("is it a legal command to increment register A?"). That's the parser's job in the next section.
 
-Another important thing to note is that the *attribute value* is not always necessary. In our example, it is sufficient to capture the fact that a `,` (comma) has been found in the stream since this will (in the case of Z80 assembly) separate the target and source operand of a given mnemonic. When and how to capture attribute values, is up to the scanner's designer. For example, we could also capture each mnemonic individually:
+Another important thing to note is that the *attribute value* is not always necessary. In our example, it is sufficient to capture the fact that a `,` (comma) has been found in the stream since this will (in the case of 6502 assembly) separate the operands of a given mnemonic or opcode. When and how to capture attribute values, is up to the scanner's designer. For example, we could also capture each mnemonic individually:
 
 ```
 <Identifier, "Start">
@@ -78,7 +78,7 @@ Another important thing to note is that the *attribute value* is not always nece
 <RegisterOperand, "A">
 ```
 
-In general, we want to keep the number of syntactical categories as low as is practical. That is obviously a bit vague, but it really depends on the kind of (programming) language you're trying to scan. Assembly languages can vary from a few dozen commands and registers for simple CPUs, up to [several thousand instructions](https://en.wikipedia.org/wiki/X86_instruction_listings) for a modern architecture. Still, scanners are usually the part that changes least often, even with constantly evolving languages like C++ or Python. Later stages will be more efficient in turning this *lexeme* or *token stream* into a full [abstract syntax tree][ast].
+In general, we want to keep the number of syntactical categories as low as is practical. That is obviously a bit vague, but it really depends on the kind of (programming) language you're trying to scan. Assembly languages can vary from a few dozen commands (70 in the case of a 65C02) and registers for simple CPUs, up to [several thousand instructions](https://en.wikipedia.org/wiki/X86_instruction_listings) for a modern architecture. Still, scanners are usually the part that changes least often, even with constantly evolving languages like C++ or Python. Later stages will be more efficient in turning this *lexeme* or *token stream* into a full [abstract syntax tree][ast].
 
 Once our scanner has transformed the input source file or stream into a lexeme stream, we hand it off to the parser.
 
@@ -107,6 +107,41 @@ Number     -> *a valid unsigned number*
 
 Identifier -> *any valid alphanumeric string*
 ```
+
+$$
+\begin{alignat*}{3}
+
+&Directive          &&\pro &&DataDefinition \quad \T{eol} \\
+&                   &&\or  &&Subroutine  \\
+&                   &&\or  &&BinaryImport  \\
+&                   &&\or  &&Macro  \\
+\\
+
+&DataDefinition     &&\pro &&Identifier \quad AssignOp \quad Number  \\
+&                   &&\or  &&DataDeclarator \quad NumberList  \\
+\\
+
+&DataDeclarator     &&\pro &&\T{bytedecl}  \\
+&                   &&\or  &&\T{worddecl}  \\
+&                   &&\or  &&\T{longdecl}  \\
+\\
+
+&NumberList         &&\pro &&Number  \\
+&                   &&\or  &&Number \quad \T{,} \quad NumberList  \\
+\\
+
+\end{alignat*}
+$$
+
+mumu $inline antimumu$
+
+$$
+f(n)=
+    \begin{cases}
+        n/2&{\text{if }} n\equiv 0{\pmod {2}} \newline
+        3n+1&{\text{if }} n\equiv 1{\pmod {2}}
+    \end{cases}
+$$
 
 Again, this is very simplified for demonstration purposes. We'll go into more detail about CFGs when we start implementing the parser. For now, you only need to know that a CFG is made up of so-called *production rules*, *non-terminals*, and *terminals*. A *production rule* determines how a *non-terminal* symbol on the left of the arrow can be replaced with a combination of *terminals* and *non-terminals*. It is conventional to start non-terminals with an upper-case letter, and terminals with lower-case letters. We'll follow this convention. Here's an important thing to remember: **The *terminal symbols* of our CFG match the *lexemes* our scanner can produce**.
 

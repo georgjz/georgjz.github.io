@@ -19,6 +19,8 @@ permalink:          /:title/
 markdown:           kramdown
 highlighter:        rouge
 kramdown:
+  input: GFM
+  # math_engine: mathjax # you can also set this field to 'katex'
   auto_ids:         true
   footnote_nr:      1
   entity_output:    as_char
