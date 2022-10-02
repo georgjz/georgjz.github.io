@@ -108,39 +108,51 @@ Number     -> *a valid unsigned number*
 Identifier -> *any valid alphanumeric string*
 ```
 
+mumu $$inline antimumu$$ test.
+
 $$
 \begin{alignat*}{3}
+\def\T#1{{\texttt{#1}}}
+\def\pro{{\quad \to \quad}}
+\def\or{{\quad \; \mid \quad }}
 
-&Directive          &&\pro &&DataDefinition \quad \T{eol} \\
-&                   &&\or  &&Subroutine  \\
-&                   &&\or  &&BinaryImport  \\
-&                   &&\or  &&Macro  \\
+&Module             &&\pro &&ModuleHeader \quad CodeBlock \quad \T{eof}  \\
 \\
 
-&DataDefinition     &&\pro &&Identifier \quad AssignOp \quad Number  \\
-&                   &&\or  &&DataDeclarator \quad NumberList  \\
+&ModuleHeader       &&\pro &&\T{module} \quad Identifier \quad ExportList \quad \T{eol}  \\
 \\
 
-&DataDeclarator     &&\pro &&\T{bytedecl}  \\
-&                   &&\or  &&\T{worddecl}  \\
-&                   &&\or  &&\T{longdecl}  \\
+&ExportList         &&\pro &&\T{lparen} \quad IdList \quad \T{rparen}  \\
+&                   &&\or  &&\epsilon  \\
 \\
 
-&NumberList         &&\pro &&Number  \\
-&                   &&\or  &&Number \quad \T{,} \quad NumberList  \\
+&IdList             &&\pro &&Identifier  \\
+&                   &&\or  &&Identifier \quad \T{,} \quad IdList  \\
+&                   &&\or  &&\epsilon  \\
 \\
 
 \end{alignat*}
 $$
 
-mumu $inline antimumu$
+Death to America, and Butter Sauce.
+
+$$
+\begin{alignat}{2}
+   10&x+&3&y=2 \\
+   3&x+&13&y=4
+\end{alignat}
+$$
 
 $$
 f(n)=
     \begin{cases}
-        n/2&{\text{if }} n\equiv 0{\pmod {2}} \newline
+        n/2&{\text{if }} n\equiv 0{\pmod {2}}  \\
         3n+1&{\text{if }} n\equiv 1{\pmod {2}}
     \end{cases}
+$$
+
+$$
+c = \pm\sqrt{a^2 + b^2}
 $$
 
 Again, this is very simplified for demonstration purposes. We'll go into more detail about CFGs when we start implementing the parser. For now, you only need to know that a CFG is made up of so-called *production rules*, *non-terminals*, and *terminals*. A *production rule* determines how a *non-terminal* symbol on the left of the arrow can be replaced with a combination of *terminals* and *non-terminals*. It is conventional to start non-terminals with an upper-case letter, and terminals with lower-case letters. We'll follow this convention. Here's an important thing to remember: **The *terminal symbols* of our CFG match the *lexemes* our scanner can produce**.

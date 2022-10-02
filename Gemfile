@@ -6,3 +6,5 @@ gem 'jekyll-mentions'
 gem 'jekyll-feed'
 gem 'jekyll-seo-tag'
 gem 'jekyll-sitemap'
+gem 'jektex'
+gem "webrick", "~> 1.7"

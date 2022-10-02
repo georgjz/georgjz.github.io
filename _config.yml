@@ -20,13 +20,11 @@ markdown:           kramdown
 highlighter:        rouge
 kramdown:
   input: GFM
-  # math_engine: mathjax # you can also set this field to 'katex'
   auto_ids:         true
   footnote_nr:      1
   entity_output:    as_char
   toc_levels:       1..6
   enable_coderay:   false
-mathjax:            true
 sass:
   sass_dir:         _sass
   style:            compressed
@@ -37,7 +35,6 @@ disqus_shortname:   georgsyard
 # Social
 # if you don't have any of social below, comment the line.
 google:
-  #plus:            #username
   analytics:        UA-122825347-1
   #verify:
   #ad-client:
@@ -47,7 +44,6 @@ google:
 # twitter:            username
 # facebook:           username
 github-url:         georgjz
-stackoverflow:      5594534/georgjz
 #instagram:          username
 tumblr:             georgsyard
 #steam:              username
@@ -62,6 +58,13 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-seo-tag
+  - jektex
+
+jektex:
+  macros:
+    - ["\\T", "\\texttt{#1}"]
+    - ["\\pro", "\\quad \\to \\quad"]
+    - ["\\or", "\\quad \\; \\mid \\quad"]
 
 jekyll-mentions:
     base_url: https://github.com
