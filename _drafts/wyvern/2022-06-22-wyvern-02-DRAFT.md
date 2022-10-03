@@ -1,10 +1,9 @@
 ---
 layout:     post
 title:      "How to Write An Assembler in Racket, Part 2: Architecture Overview"
-date:       2022-09-20
+date:       2022-06-22
 excerpt:    "Gives an architectural overview of the Wyvern toolchain"
 tags:       [programming, 6502, Z80, assembler, tutorial, Racket, Wyvern]
-feature:    /assets/snesaa/02/snesaa02_featurecard.gif
 published:  true
 comments:   true
 ---
@@ -37,7 +36,7 @@ Keep in mind this is just a high-level overview. We'll look at each part's funct
 
 The *scanner*'s job is to take an input stream of characters (aka, the source file) and turn it into a stream of *lexemes*. This step in a compiler toolchain is generally called [lexical analysis][lex]. The scanner is sometimes also-called *lexer* or *tokenizer*. The goal is to group characters into lexemes that the next step, the parser, can understand.
 
-A lexeme is a tuple made up of a *token type* and an *attribute* or *token value*, we'll represent this simply as `<token-type, attribute-value>`. *Token types* can be syntactical categories like *identifier*, *number*, *function call*, etc.
+A lexeme is a tuple made up of a *token type* and an *attribute* or *token value*, we'll represent this simply as tuple `(token-type, attribute-value)`. *Token types* can be syntactical categories like *identifier*, *number*, *function call*, etc.
 
 Let's look at a simple example. Suppose we have this input source stream:
 
@@ -51,15 +50,15 @@ Start:
 We want to turn this into a stream of lexemes. Depending on how we define our syntactical categories, this could be one possible result:
 
 ```
-<Identifier, "Start">
-<Mnemonic, "mov">
-<Register, "A">
-<Comma>
-<UnsignedInteger, 12>
-<Mnemonic, "inc">
-<Register, "A">
-<Mnemonic, "inc">
-<Register, "A">
+ (Identifier, "Start")
+(Mnemonic, "mov")
+(Register, "A")
+(Comma)
+(UnsignedInteger, 12)
+(Mnemonic, "inc")
+(Register, "A")
+(Mnemonic, "inc")
+(Register, "A")
 ```
 
 Note how the scanner simply *mechanically* translates the input stream into lexemes. We're not interested yet in checking whether this program is valid or not ("is it a legal command to increment register A?"). That's the parser's job in the next section.
@@ -67,15 +66,15 @@ Note how the scanner simply *mechanically* translates the input stream into lexe
 Another important thing to note is that the *attribute value* is not always necessary. In our example, it is sufficient to capture the fact that a `,` (comma) has been found in the stream since this will (in the case of 6502 assembly) separate the operands of a given mnemonic or opcode. When and how to capture attribute values, is up to the scanner's designer. For example, we could also capture each mnemonic individually:
 
 ```
-<Identifier, "Start">
-<MOVMnemonic>
-<RegisterOperand, "A">
-<Comma>
-<UnsignedInteger, 12>
-<INCMnemonic>
-<RegisterOperand, "A">
-<INCMnemonic>
-<RegisterOperand, "A">
+(Identifier, "Start")
+(MOVMnemonic)
+(RegisterOperand, "A")
+(Comma)
+(UnsignedInteger, 12)
+(INCMnemonic)
+(RegisterOperand, "A")
+(INCMnemonic)
+(RegisterOperand, "A")
 ```
 
 In general, we want to keep the number of syntactical categories as low as is practical. That is obviously a bit vague, but it really depends on the kind of (programming) language you're trying to scan. Assembly languages can vary from a few dozen commands (70 in the case of a 65C02) and registers for simple CPUs, up to [several thousand instructions](https://en.wikipedia.org/wiki/X86_instruction_listings) for a modern architecture. Still, scanners are usually the part that changes least often, even with constantly evolving languages like C++ or Python. Later stages will be more efficient in turning this *lexeme* or *token stream* into a full [abstract syntax tree][ast].
@@ -112,47 +111,29 @@ mumu $$inline antimumu$$ test.
 
 $$
 \begin{alignat*}{3}
-\def\T#1{{\texttt{#1}}}
-\def\pro{{\quad \to \quad}}
-\def\or{{\quad \; \mid \quad }}
 
-&Module             &&\pro &&ModuleHeader \quad CodeBlock \quad \T{eof}  \\
+&Program            &&\pro &&Lines \\
 \\
 
-&ModuleHeader       &&\pro &&\T{module} \quad Identifier \quad ExportList \quad \T{eol}  \\
+&Lines              &&\pro &&Identifier \quad \T{:}  \\
+&                   &&\or  &&Mnemonic \quad Register  \\
+&                   &&\or  &&Mnemonic \quad Register \quad \T{,} \quad Number  \\
 \\
 
-&ExportList         &&\pro &&\T{lparen} \quad IdList \quad \T{rparen}  \\
-&                   &&\or  &&\epsilon  \\
+&Mnemonic           &&\pro &&\T{mov}  \\
+&                   &&\or  &&\T{inc}  \\
 \\
 
-&IdList             &&\pro &&Identifier  \\
-&                   &&\or  &&Identifier \quad \T{,} \quad IdList  \\
-&                   &&\or  &&\epsilon  \\
+&Register           &&\pro &&\T{a}  \\
+\\
+
+&Number             &&\pro &&\T{any valid unsigned number}  \\
+\\
+
+&Identifier         &&\pro &&\T{any valid alphanumeric string}  \\
 \\
 
 \end{alignat*}
-$$
-
-Death to America, and Butter Sauce.
-
-$$
-\begin{alignat}{2}
-   10&x+&3&y=2 \\
-   3&x+&13&y=4
-\end{alignat}
-$$
-
-$$
-f(n)=
-    \begin{cases}
-        n/2&{\text{if }} n\equiv 0{\pmod {2}}  \\
-        3n+1&{\text{if }} n\equiv 1{\pmod {2}}
-    \end{cases}
-$$
-
-$$
-c = \pm\sqrt{a^2 + b^2}
 $$
 
 Again, this is very simplified for demonstration purposes. We'll go into more detail about CFGs when we start implementing the parser. For now, you only need to know that a CFG is made up of so-called *production rules*, *non-terminals*, and *terminals*. A *production rule* determines how a *non-terminal* symbol on the left of the arrow can be replaced with a combination of *terminals* and *non-terminals*. It is conventional to start non-terminals with an upper-case letter, and terminals with lower-case letters. We'll follow this convention. Here's an important thing to remember: **The *terminal symbols* of our CFG match the *lexemes* our scanner can produce**.
