@@ -11,9 +11,30 @@ comments:   true
 
 [Last time][wyvern03], we designed a rough context-free grammar (CFG) for the Wyvern assembler. In this article, we'll refine and complete it. This includes dealing with whitespace correctly. The resulting CFG will almost be ready for implementation.
 
-
-
 ## Fixing Whitespace
+
+Let's start by fixing the whitespace issue. That is, we need to make sure that our grammar/parser will correctly recognize newline in all situations. We'll use a top-down approach, so let's start at the highest level, the module:
+
+$$
+\begin{alignat*}{3}
+
+&Module             &&\pro &&ModuleHeader \quad CodeBlock \quad \T{eof}  \\
+\\
+
+&ModuleHeader       &&\pro &&\T{module} \quad Identifier \quad ExportList \quad \T{eol}  \\
+\\
+
+&ExportList         &&\pro &&\T{lparen} \quad IdList \quad \T{rparen}  \\
+&                   &&\or  &&\epsilon  \\
+\\
+
+&IdList             &&\pro &&Identifier  \\
+&                   &&\or  &&Identifier \quad \T{,} \quad IdList  \\
+&                   &&\or  &&\epsilon  \\
+\\
+
+\end{alignat*}
+$$
 
 Problems with assembly languages:
 
