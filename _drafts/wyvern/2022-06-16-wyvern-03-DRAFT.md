@@ -2,30 +2,30 @@
 layout:     post
 title:      "How to Write An Assembler in Racket, Part 3: Context-Free Grammar"
 date:       2022-06-16
-excerpt:    "We'll look at designing a context-free grammar for the 65C02 instruction set that will serve as basis for implementing a lexer and parser for the Wyvern assembler"
+excerpt:    "We'll look at designing a context-free grammar for the 65C02 instruction set that will serve as a basis for implementing a lexer and parser for the Wyvern assembler"
 tags:       [programming, 6502, assembler, tutorial, Racket, Wyvern, context-free grammar]
 published:  true
 comments:   true
 ---
 # DRAFT
 
-[Last time][wyvern02], we looked at the three main parts of the assembler. Next, we'll look at the [65C02 instruction set architexture][6502], and how to translate a [non-orthogonal ISA][orthogonal] into a [context-free grammar (CFG)][cfg]. The goal is to have a complete description of the 65C02 instruction set. Which we will then transform and optimize for a [top-down parsing][tdp] in the next post.
+[Last time][wyvern02], we looked at the three main parts of the assembler. Next, we'll look at the [65C02 instruction set architexture][6502], and how to translate a [non-orthogonal ISA][orthogonal] into a [context-free grammar (CFG)][cfg]. The goal is to have a complete description of the 65C02 instruction set. We will then transform and optimize it for a [top-down parsing][tdp] in the next post.
 
 But first, we'll consider some particular problems that arise when we express assembly language as CFGs.
 
 ## Context-Free Grammars and Assembly Languages
 
-Translating assembly languages into CFGs poses a number of particular challenges that rarely occur with higher-level languages. The following list is not exhaustive, as many assembly dialects will come with their own particularities (looking at you, [RCA1802][1802]). There's two points I want to point out before we start designing a 65C02 CFG.
+Translating assembly languages into CFGs poses some particular challenges that rarely occur with higher-level languages. The following list is not exhaustive, as many assembly dialects will come with their own particularities (looking at you, [RCA1802][1802]). There are two points I want to point out before we start designing a 65C02 CFG.
 
 **The [abstract syntax tree][ast] can be harder to define.** This point only applies to Wyvern since I want to support multiple architectures (it is not generally true for single-architecture assemblers is what I'm trying to say). So there will be a "common grammar" of directives (think `.db`, `.subroutine`, `.import`, etc.) that must live next so several "subgrammars" for each supported processor(65C02, Z80, etc.) This will almost certainly result in some kind of [grammar ambiguity][ambi], as different processors define the same addressing mode (more or less) differently, as an example.
 
 The other aspect is that most assembly language parse trees will be rather "flat" - that is, their height will be rather low. The number of possible tree nodes will be higher than with most higher-level languages.
 
-**Non-orthogonal instruction sets.** Most older instruction sets are not orthogonal. That means, not every instruction supports every addressing mode. For example, the 65C02 grammar we will design later down below, combines 70 different instructions (or opcodes, if you prefer) with 16 different addressing modes (we'll include the full extensions of the [WD65C02S by Western Design Center][wdc65], which is fully backward compatible with earlier 6502 models). This can quickly bloat the CFG imensly. I'll present a semiformal approach to this problem inspired by [subset partitions][setpart].
+**Non-orthogonal instruction sets.** Most older instruction sets are not orthogonal. That means, not every instruction supports every addressing mode. For example, the 65C02 grammar we will design later down below combines 70 different instructions (or opcodes, if you prefer) with 16 different addressing modes (we'll include the full extensions of the [WD65C02S by Western Design Center][wdc65], which is fully backward compatible with earlier 6502 models). This can quickly bloat the CFG immensely. I'll present a semi-formal approach to this problem inspired by [subset partitions][setpart].
 
-**Whitespace can be context-sensitive.** Handling whitespace correctly in context-free grammars can be hairy. I hold that it is actually easier to describe a language that *isn't* whitespace-sensitive. Usually, we need to introduce terminals for each relevant whitespace symbols, mostly space, newline, tab. The [grammar of Python](https://docs.python.org/3/reference/grammar.html) for example defines `NEWLINE`, `INDENT`, and `DEDENT` (among others).
+**Whitespace can be context-sensitive.** Handling whitespace correctly in a context-free grammar can be hairy. I hold that it is actually easier to describe a language that *isn't* whitespace-sensitive. Usually, we need to introduce terminals for each relevant whitespace symbol, mostly space, newline, and tab. The [grammar of Python](https://docs.python.org/3/reference/grammar.html) for example defines `NEWLINE`, `INDENT`, and `DEDENT` (among others).
 
-Many assemblers in the past have used whitespace and/or identation to differentiate labels, opcodes, operands, and comments. Wyvern is no such assembler. The only whitespace symbol Wyvern will care about is newline.
+Many assemblers in the past have used whitespace and/or indentation to differentiate labels, opcodes, operands, and comments. Wyvern is no such assembler. The only whitespace symbol Wyvern will care about is newline.
 
 But enough of the prelude, let's get our hands dirty.
 
@@ -35,7 +35,7 @@ For demonstration purposes, I'll start by adding support for the [WD65C02S][wdc6
 
 ### Notational Convention
 
-Here's a short overview of the notation I'll use in this and future related post to describe context-free grammars.
+Here's a short overview of the notation I'll use in this and future related posts to describe context-free grammars.
 
 A **context-free grammar** is a four-tuple $$G = (V, \Sigma, R, S)$$, where
 
@@ -70,7 +70,7 @@ $$
 
 where $$\pro$$ separates the *head* of the production on the left of it from its *body* on the right. Alternatives are denoted with $$\or$$.
 
-There is no special concatenation operator, a space between nonterminals and terminals represents concatenation. There will be an *implicit whitespace consumer* that "eats" all whitespace except newline. Newline is it's own terminal denoted as $$\T{eol}$$ (end of line). This may be a bit weird if you've worked with [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) in the past, but bear with me. This is the result of whitespace being weird to handle for assembly language dialects mentioned above.
+There is no special concatenation operator, a space between nonterminals and terminals represents concatenation. There will be an *implicit whitespace consumer* that "eats" all whitespace except newline. Newline is its own terminal denoted as $$\T{eol}$$ (end of line). This may be a bit weird if you've worked with [EBNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form) in the past but bear with me. This is the result of whitespace being weird to handle for assembly language dialects mentioned above.
 
 The [Kleene closure][kleene] is a nonterminal that can repeat zero or more times; positive closure is a nonterminal that repeats at least once:
 
@@ -81,11 +81,13 @@ $$
 &PostiveClosure     &&\pro AtLeastOnce^{+}  \\
 \\
 
-&Nonterminal^{+}   &&\equiv \quad Nonterminal \quad Nonterminal^{\ast}  \\
+&Nonterminal^{+}    &&\equiv \quad Nonterminal \quad Nonterminal^{\ast}  \\
 \\
 
 \end{alignat*}
 $$
+
+I use superscript numbers to denote terminals that can be concatenated up to $$n$$ times. So $$Terminal^{3}$$ means that $$Terminal$$ can be concatenated up to three times (including zero).
 
 Finally, to avoid confusion, special symbols like `( ) , [ ]`, etc. are underlined if they're a terminal of the language described:
 
@@ -98,11 +100,11 @@ $$
 \end{alignat*}
 $$
 
-Terminals like $$\T{\underline{(}}$$ and $$\T{lparens}$$ are equivalent and may be used interchangably where the clarity is necessary.
+Terminals like $$\T{\underline{(}}$$ and $$\T{lparens}$$ are equivalent and may be used interchangeably where clarity is necessary.
 
 ### Representing Addressing Modes
 
-The 65C02 comes with 16 addressing modes, the common syntax for them has stayed pretty much the same across assemblers and platforms for the last 40+ years:
+The 65C02 comes with 16 addressing modes, and the common syntax for them has stayed pretty much the same across assemblers and platforms for the last 40+ years:
 
 $$
 \begin{alignat*}{3}
@@ -132,7 +134,7 @@ We introduce the two terminals $$WordExpr$$ and $$ByteExpr$$ to represent arithm
 
 ### The Subset of Supported Addressing Modes
 
-Here comes the semiformal/-heuristic approach to create a correct grammar that combines only valid opcode-addressing mode pairs.
+Here comes the semiformal/-heuristic approach for creating a correct grammar that combines only valid opcode-addressing mode pairs.
 
 **1: Sort all opcodes by the number of addressing modes they support into sets.** In the case of the WD65C02S, the 70 opcodes support between one and nine addressing modes (none support six or seven addressing modes):
 
@@ -156,7 +158,7 @@ $$
 
 I use Greek number names to denote the number of addressing elements *each element* of the seven sets support; these addressing modes don't necessarily have to be the same, we'll fix that in the next step.
 
-**2: For each set from step 1, create a set of addressing modes supported by each opcode (in that set). If an opcode adds a new addressing mode, expand that set in terms of previous sets. Else, give the set a unique new name. Skip opcodes whose addressing mode you have already found.** This is actually the hard part of my approach. That's why I call it "semiformal", since you'll still need to think along a bit. Let's see an example to (hopefully) make this step clear.
+**2: For each set from step 1, create a set of addressing modes supported by each opcode (in that set). If an opcode adds a new addressing mode, expand that set in terms of previous sets. Else, give the set a unique new name. Skip opcodes whose addressing mode you have already found.** This is actually the hard part of my approach. That's why I call it "semiformal" since you'll still need to think along a bit. Let's see an example to (hopefully) make this step clear.
 
 It is easiest to start with the $$\T{mono}$$ set, aka, the opcodes that only support one addressing mode. Using the [datasheet][wdcds], we find that the first opcode `clc` supports only $$Implied$$ addressing, since we have not seen it yet, we create a new set called $$Alpha$$ and add $$Implied$$ to it. Some of the following opcodes `sec`, `cli`, `tya`, etc. all support implied addressing, so we can eliminate them. When we come across `jsr`, for example, we add a new set $$Beta$$ with $$Absolute$$ in it.
 
@@ -212,9 +214,9 @@ $$
 \end{alignat*}
 $$
 
-Here you can also see why you still need to think along a bit: $$Iota$$ and $$Kappa$$ are necessary because the index registers of the 65C02 cannot operate on themselves. This is a quirk specific to that architecture. When you create your own grammar, keep these quirks in mind. (The other reason being that the sets above overlap, aka, they're not disjoint - as is required by set partitions.)
+Here you can also see why you still need to think along a bit: $$Iota$$ and $$Kappa$$ are necessary because the index registers of the 65C02 cannot operate on themselves. This is a quirk specific to that architecture. When you create your own grammar, keep these quirks in mind. (The other reason is that the sets above overlap, aka, they're not disjoint - as is required by set partitions.)
 
-**3: Create set partitions of the sets from step 1 based on the addressing mode sets from step 2.** This basically means, sort opcodes by the addressing modes they support:
+**3: Create set partitions of the sets from step 1 based on the addressing mode sets from step 2.** This basically means, sorting opcodes by the addressing modes they support:
 
 $$
 \begin{alignat*}{2}
@@ -242,7 +244,7 @@ $$
 
 Now you in essence have sorted all opcodes in sets of opcodes that support the exact same set of addressing modes.
 
-**4: Combine the sets from step 2 and 3 into a grammar that produces all valid opcode-addressing mode pairs.** Don't forget to add a start symbol:
+**4: Combine the sets from steps 2 and 3 into a grammar that produces all valid opcode-addressing mode pairs.** Don't forget to add a start symbol:
 
 $$
 \begin{alignat*}{3}
@@ -287,11 +289,11 @@ $$
 \end{alignat*}
 $$
 
-That's it, now you have a grammar that can correctly deriviate legal opcode-addressing mode pairs. Remember that we'll take care of whitespace separately. For now, assume that the assembler will recognize only one $$Instr$$ per line.
+That's it, now you have a grammar that can correctly derive legal opcode-addressing mode pairs. Remember that we'll take care of whitespace separately. For now, assume that the assembler will recognize only one $$Instr$$ per line.
 
 ## Assembler Directives and Features
 
-Now that we have a basic CFG for 65C02 code, we need to add some common feature found in assemblers. We'll start with numbers and arithmetic expressions.
+Now that we have a basic CFG for 65C02 code, we need to add some common features found in assemblers. We'll start with numbers and arithmetic expressions.
 
 ### Numbers
 
@@ -378,7 +380,7 @@ You may have noticed that I don't really define terminals yet - that's on purpos
 
 ## Module Structure
 
-This section describes the [module structure of Wyvern][wyvern01]. Modules will be the basic translation units of Wyvern, so all code must reside in a module. The text of this section will also include a lot of semantic informations. Context-free grammars are not good at encoding semantic informations and rules, we will use additional notational tools to do that in the next post. But for now, let's define what a module is.
+This section describes the [module structure of Wyvern][wyvern01]. Modules will be the basic translation units of Wyvern, so all code must reside in a module. The text of this section will also include a lot of semantic information. Context-free grammars are not good at encoding semantic information and rules, we will use additional notational tools to do that in the next post. But for now, let's define what a module is.
 
 A module resides in a single file. It has a module header and a code block. If the export list is omitted, all symbols from the module are exported (NB! This is a good example of semantic information that is hard to encode in CFG notation. As is the following:) If the parentheses are empty, no symbols are exported.
 
@@ -420,7 +422,7 @@ $$
 \end{alignat*}
 $$
 
-Legal directives are: Value aliases; data definitions; binary file imports; macros.
+Legal directives are Value aliases; data definitions; binary file imports; macros.
 
 Data definitions allow for value aliases and "hardcoded" binary data.
 
@@ -495,7 +497,7 @@ $$
 \end{alignat*}
 $$
 
-The observant reader will once again notice that whitespace is handled rather nonchalantly here. At this stage I'm interested in a rather rough outline. But we've actually defined enough of Wyvern's grammar that we can start refining it.
+The observant reader will once again notice that whitespace is handled rather nonchalantly here. At this stage, I'm interested in a rather rough outline. But we've actually defined enough of Wyvern's grammar that we can start refining it.
 
 ## Conclusion
 
