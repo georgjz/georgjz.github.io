@@ -9,7 +9,11 @@ comments:   true
 ---
 # DRAFT
 
-## Context-Free Grammars and Assembly Languages
+[Last time][wyvern03], we designed a rough context-free grammar (CFG) for the Wyvern assembler. In this article, we'll refine and complete it. This includes dealing with whitespace correctly. The resulting CFG will almost be ready for implementation.
+
+
+
+## Fixing Whitespace
 
 Problems with assembly languages:
 
@@ -20,6 +24,7 @@ Problems with assembly languages:
 
 [wyvern01]: {% post_url wyvern/2022-03-10-wyvern-01 %}
 [wyvern02]: {% post_url wyvern/2022-06-02-wyvern-02 %}
+[wyvern03]: {% post_url wyvern/2022-06-16-wyvern-03 %}
 [z80]: https://en.wikipedia.org/wiki/Zilog_Z80
 [6502]: https://en.wikipedia.org/wiki/MOS_Technology_6502
 [68k]: https://en.wikipedia.org/wiki/Motorola_68000
