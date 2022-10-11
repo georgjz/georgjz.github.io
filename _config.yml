@@ -60,6 +60,7 @@ plugins:
   - jekyll-seo-tag
   - jektex
 
+disable_disk_cache: true
 jektex:
   macros:
     - ["\\T", "\\texttt{#1}"]
