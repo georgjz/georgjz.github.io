@@ -30,6 +30,12 @@ sass:
   sass_dir:         _sass
   style:            compressed
 
+# Katex
+katex:
+  rendering_options:
+    macros:
+      "\\TArg": "\\texttt{#1}"
+
 # Comments
 disqus_shortname:   georgsyard
 

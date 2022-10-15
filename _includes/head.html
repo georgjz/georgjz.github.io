@@ -66,11 +66,15 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.js" integrity="sha384-kSBEBJfG5+zZAKID5uvi6avDXnnOGLnbknFv6VMnVBrknlFw67TwFsY9PaD33zBI" crossorigin="anonymous"></script>
 
     <!-- To automatically render math in text elements, include the auto-render extension: -->
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+    <!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script> -->
     <script>
         document.addEventListener( "DOMContentLoaded", function() {
             renderMathInElement( document.body, {
-
+                macros: [
+                   "\\T": "\\texttt{#1}",
+                   "\\pro": "\\quad \\to \\quad",
+                   "\\or": "\\quad \\; \\mid \\quad"]
+                ]
             });
         });
     </script>
