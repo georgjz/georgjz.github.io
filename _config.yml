@@ -60,7 +60,6 @@ plugins:
   - jekyll-gist
   - jekyll-seo-tag
   - kramdown-math-katex
-  # - jektex
 
 # disable_disk_cache: true
 # jektex:
