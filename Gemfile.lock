@@ -10,7 +10,6 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     colorator (1.1.0)
     concurrent-ruby (1.1.10)
-    digest (3.1.0)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
@@ -22,17 +21,12 @@ GEM
     faraday-net_http (3.0.1)
     ffi (1.15.5)
     forwardable-extended (2.6.0)
-    html-pipeline (2.14.2)
+    html-pipeline (2.14.3)
       activesupport (>= 2)
       nokogiri (>= 1.4)
-    htmlentities (4.3.4)
     http_parser.rb (0.8.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
-    jektex (0.0.8)
-      digest (~> 3.0, >= 3.0.0)
-      execjs (~> 2.8, >= 2.8.1)
-      htmlentities (~> 4.3, >= 4.3.4)
     jekyll (4.2.2)
       addressable (~> 2.4)
       colorator (~> 1.0)
@@ -48,7 +42,7 @@ GEM
       rouge (~> 3.0)
       safe_yaml (~> 1.0)
       terminal-table (~> 2.0)
-    jekyll-feed (0.16.0)
+    jekyll-feed (0.17.0)
       jekyll (>= 3.7, < 5.0)
     jekyll-gist (1.5.0)
       octokit (~> 4.2)
@@ -63,8 +57,13 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
+    katex (0.9.0)
+      execjs (~> 2.7)
     kramdown (2.4.0)
       rexml
+    kramdown-math-katex (1.0.1)
+      katex (~> 0.4)
+      kramdown (~> 2.0)
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     liquid (4.0.3)
@@ -105,13 +104,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  jektex
   jekyll (>= 3.6.3)
   jekyll-feed
   jekyll-gist
   jekyll-mentions
   jekyll-seo-tag
   jekyll-sitemap
+  kramdown-math-katex
   webrick (~> 1.7)
 
 BUNDLED WITH

@@ -10,8 +10,8 @@ logo:               'assets/img/logo.png'
 background:         'assets/img/placeholder-big.jpg'
 tiled_bg:           false   # Set this true if you want to tile your background image, otherwise it will be covered
 locale:             en_US
-url:                https://georgjz.github.io
-# url:                http://localhost:4000 # for local debugging
+# url:                https://georgjz.github.io
+url:                http://localhost:4000 # for local debugging
 baseurl:            /
 
 # Jekyll
@@ -19,6 +19,7 @@ permalink:          /:title/
 markdown:           kramdown
 highlighter:        rouge
 kramdown:
+  math_engine: katex
   input: GFM
   auto_ids:         true
   footnote_nr:      1
@@ -58,14 +59,15 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-seo-tag
-  - jektex
+  - kramdown-math-katex
+  # - jektex
 
-disable_disk_cache: true
-jektex:
-  macros:
-    - ["\\T", "\\texttt{#1}"]
-    - ["\\pro", "\\quad \\to \\quad"]
-    - ["\\or", "\\quad \\; \\mid \\quad"]
+# disable_disk_cache: true
+# jektex:
+#   macros:
+#     - ["\\T", "\\texttt{#1}"]
+#     - ["\\pro", "\\quad \\to \\quad"]
+#     - ["\\or", "\\quad \\; \\mid \\quad"]
 
 jekyll-mentions:
     base_url: https://github.com
