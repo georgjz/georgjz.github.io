@@ -7,5 +7,5 @@ gem 'jekyll-feed'
 gem 'jekyll-seo-tag'
 gem 'jekyll-sitemap'
 gem 'kramdown-math-katex'
-# gem 'jektex'
-gem "webrick", "~> 1.7"
+# gem 'jekyll-katex'
+# gem "webrick", "~> 1.7"
