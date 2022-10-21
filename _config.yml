@@ -19,7 +19,7 @@ permalink:          /:title/
 markdown:           kramdown
 highlighter:        rouge
 kramdown:
-  math_engine: katex
+  math_engine: mathjax
   input: GFM
   auto_ids:         true
   footnote_nr:      1
@@ -59,7 +59,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-seo-tag
-  - kramdown-math-katex
+  # - kramdown-math-katex
 # plugins:
 # disable_disk_cache: true
 # jektex:

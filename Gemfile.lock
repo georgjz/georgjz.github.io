@@ -197,13 +197,8 @@ GEM
       gemoji (~> 3.0)
       html-pipeline (~> 2.2)
       jekyll (>= 3.0, < 5.0)
-    katex (0.9.0)
-      execjs (~> 2.7)
     kramdown (2.3.2)
       rexml
-    kramdown-math-katex (1.0.1)
-      katex (~> 0.4)
-      kramdown (~> 2.0)
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
     liquid (4.0.3)
@@ -262,7 +257,6 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
-  kramdown-math-katex
   webrick (~> 1.7)
 
 BUNDLED WITH
