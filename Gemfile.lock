@@ -112,7 +112,6 @@ DEPENDENCIES
   jekyll-seo-tag
   jekyll-sitemap
   kramdown-math-katex
-  webrick (~> 1.7)
 
 BUNDLED WITH
    2.3.22

@@ -65,8 +65,8 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-seo-tag
-  - kramdown-math-katex
-
+  # - kramdown-math-katex
+# plugins:
 # disable_disk_cache: true
 # jektex:
 #   macros:
