@@ -1,11 +1,12 @@
 source "https://rubygems.org"
 
-gem "jekyll", ">= 3.6.3"
-gem "jekyll-gist"
-gem 'jekyll-mentions'
-gem 'jekyll-feed'
-gem 'jekyll-seo-tag'
-gem 'jekyll-sitemap'
+gem 'github-pages'
+# gem "jekyll", ">= 3.6.3"
+# gem "jekyll-gist"
+# gem 'jekyll-mentions'
+# gem 'jekyll-feed'
+# gem 'jekyll-seo-tag'
+# gem 'jekyll-sitemap'
 gem 'kramdown-math-katex'
 # gem 'jekyll-katex'
-# gem "webrick", "~> 1.7"
+gem 'webrick', '~> 1.7'
