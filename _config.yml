@@ -59,14 +59,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-seo-tag
-  # - kramdown-math-katex
-# plugins:
-# disable_disk_cache: true
-# jektex:
-#   macros:
-#     - ["\\T", "\\texttt{#1}"]
-#     - ["\\pro", "\\quad \\to \\quad"]
-#     - ["\\or", "\\quad \\; \\mid \\quad"]
 
 jekyll-mentions:
     base_url: https://github.com
