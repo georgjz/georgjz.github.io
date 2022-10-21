@@ -30,6 +30,12 @@ sass:
   sass_dir:         _sass
   style:            compressed
 
+# Katex
+katex:
+  rendering_options:
+    macros:
+      "\\TArg": "\\texttt{#1}"
+
 # Comments
 disqus_shortname:   georgsyard
 
@@ -60,7 +66,6 @@ plugins:
   - jekyll-gist
   - jekyll-seo-tag
   - kramdown-math-katex
-  # - jektex
 
 # disable_disk_cache: true
 # jektex:
