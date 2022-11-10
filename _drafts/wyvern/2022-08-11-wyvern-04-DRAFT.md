@@ -9,38 +9,340 @@ comments:   true
 ---
 # DRAFT
 
-[Last time][wyvern03], we designed a rough context-free grammar (CFG) for the Wyvern assembler. In this article, we'll refine and complete it. This includes dealing with whitespace correctly. The resulting CFG will almost be ready for implementation.
+[Last time][wyvern03], we designed a rough context-free grammar (CFG) for the Wyvern assembler. In this article, we'll refine and complete it. This includes dealing with whitespace correctly. The resulting CFG will almost be ready for implementation. I am not going to point out every single change I've made but I'll point out some common mistakes and errors I found while designing this CFG. You can find the entire CFG in the [project repository on GitHub][projrep].
 
-## Fixing Whitespace
+### Note on...Notation
 
-Let's start by fixing the whitespace issue. That is, we need to make sure that our grammar/parser will correctly recognize newline in all situations. We'll use a top-down approach, so let's start at the highest level, the module:
+In the last post, I introduced the following notational conventions based on the [Kleene star operator][kleene]:
 
 $$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
 \begin{alignat*}{3}
 
-&Module             &&\pro &&ModuleHeader \quad CodeBlock \quad \T{eof}  \\
+&KleeneClosure      &&\pro ZeroOrMore^{\ast}  \\
+&PostiveClosure     &&\pro AtLeastOnce^{+}  \\
 \\
 
-&ModuleHeader       &&\pro &&\T{module} \quad Identifier \quad ExportList \quad \T{eol}  \\
-\\
-
-&ExportList         &&\pro &&\T{lparen} \quad IdList \quad \T{rparen}  \\
-&                   &&\or  &&\epsilon  \\
-\\
-
-&IdList             &&\pro &&Identifier  \\
-&                   &&\or  &&Identifier \quad \T{,} \quad IdList  \\
-&                   &&\or  &&\epsilon  \\
+&Nonterminal^{+}    &&\equiv \quad Nonterminal \quad Nonterminal^{\ast}  \\
 \\
 
 \end{alignat*}
 $$
 
-Problems with assembly languages:
+Going forward, **I'll not be using Kleene star**. The reason is, I found working with repetitions in CFGs using the Kleene star more cumbersome than useful. Instead, I'm going to be explicit about repetition since I found it helps clarity when applying techniques like left-factoring, or calculating $$\text{FIRST}$$ and $$\text{FOLLOW}$$ sets.
 
-* AST is harder to define
-* Non-orthogonal instruction sets
-* Assemblers are limited, because they never embraced structured programming. The high-level
+That
+
+## Redesigning The Module Structure CFG
+
+The CFG for the module from [last time][wyvern03] was rather rough. We'll fix a few things and present the new module CFG in its entirety. But first, let's fix some things.
+
+### Fixing Module Headers and Overall Structure
+
+We begin by renaming $$CodeBlocks$$ to $$Body$$, as in, the body of the module:
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&Module             &&\pro &&ModuleHeader \quad Body \quad \T{eof}  \\
+\\
+
+&ModuleHeader       &&\pro &&\T{module} \quad Identifier \quad ExportList \quad \T{eol}  \\
+\\
+
+&ExportList         &&\pro &&\T{lparens} \quad IdList \quad \T{rparens}  \\
+&                   &&\or  &&\T{lparens} \quad \T{rparens}  \\
+&                   &&\or  &&\epsilon  \\
+\\
+
+&IdList             &&\pro &&Identifier  \\
+&                   &&\or  &&Identifier \quad \T{comma} \quad IdList  \\
+\\
+
+\end{alignat*}
+$$
+
+The $$ExportList$$ now includes the case of empty parentheses `()`, which will signal that no symbol is to be exported from this module. Next, we look at what a module body will be made of:
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&Body               &&\pro &&ImportStmts \quad CodeBlocks  \\
+&                   &&\or  &&ImportStmts  \\
+&                   &&\or  &&CodeBlocks  \\
+&                   &&\or  &&\epsilon  \\
+\\
+
+&CodeBlocks         &&\pro &&CodeBlock  \\
+&                   &&\or  &&CodeBlock \quad CodeBlocks  \\
+\\
+
+&CodeBlock          &&\pro &&Stmts  \\
+&                   &&\or  &&Subroutine  \\
+&                   &&\or  &&Macro  \\
+\\
+
+\end{alignat*}
+$$
+
+The body of a module is made up of import statements and/or code blocks. All import statements have to precede any code blocks. A code block is either a series of code statements, a subroutine or a macro. I'm purposfully layed it out this way so I can add additional functionality easily later. Next, we'll look at what actual code looks like. This section of the CFG is very important because these productions will actually emit code later on. All others so far only provide meta-information that will be embedded into the object file the assembler generates.
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&Stmts              &&\pro &&Stmt \quad \T{eol}  \\
+&                   &&\or  &&Stmt \quad \T{eol} \quad Stmts  \\
+&                   &&\or  &&Comment \quad \T{eol}  \\
+\\
+
+&Stmt               &&\pro &&CodeLine  \\
+&                   &&\or  &&Data  \\
+\\
+
+\end{alignat*}
+$$
+
+Capturing the "comment only line" in $$Stmts$$ is a bit hamfisted, but it'll do for now. Statements are either assembly code, or data:
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&CodeLine           &&\pro &&Label \quad Instr \quad Comment  \\
+\\
+
+&Data               &&\pro &&DataDefinition \quad Comment \\
+&                   &&\or  &&BinaryImport  \\
+\\
+
+&Comment            &&\pro &&\T{commentop} \quad \T{anychar}  \\
+&                   &&\or  &&\epsilon  \\
+\\
+
+&Label              &&\pro &&Identifier \quad \T{colon}  \\
+\\
+
+\end{alignat*}
+$$
+
+The important part here is the nonterminal $$Instr$$. This will be defined by the individual context-free grammars for the supported architectures. In our case, it's only [6502][6502], that CFG we designed [last time][wyvern03].
+
+Next, how to form import statements:
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&ImportStmts        &&\pro &&ImportStmt \quad \T{eol}  \\
+&                   &&\or  &&ImportStmt \quad \T{eol} \quad ImportStmts  \\
+\\
+
+&ImportStmt         &&\pro &&\T{importop} \quad ImportIdentifier  \\
+\\
+
+&ImportIdentifier   &&\pro &&Identifier  \\
+&                   &&\or  &&Identifier \quad \T{period} \quad ImportIdentifier  \\
+\\
+
+\end{alignat*}
+$$
+
+There's not a lot to discuss here. These productions should be able to capture import statements of the form
+
+```haskell
+import Lib.Foo
+```
+
+The other important directives an assembler must understand are those for generating data:
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&DataDefinition     &&\pro &&Identifier \quad \T{assignop} \quad Number  \\
+&                   &&\or  &&Label \quad DataDeclarator \quad NumberList  \\
+&                   &&\or  &&DataDeclarator \quad NumberList  \\
+\\
+
+&DataDeclarator     &&\pro &&\T{bytedecl}  \\
+&                   &&\or  &&\T{worddecl}  \\
+&                   &&\or  &&\T{longdecl}  \\
+\\
+
+&NumberList         &&\pro &&Number  \\
+&                   &&\or  &&Number \quad \T{comma} \quad NumberList  \\
+\\
+
+\end{alignat*}
+$$
+
+This should allow users to define data in the form of
+
+```
+Label: .byte $01, $02, $03
+.import "Graphics.bin"
+```
+
+You may have noticed that I use a few terminals of the form $$\texttt{bytedecl}$$ or $$\texttt{binimportop}$$ which aren't really defined yet; think of `.byte` and `.import` as examples. Remember that terminals will be handled by the lexer, not the parser. We'll gather all of the terminals later on in development and replace them with [regular expressions][re] which are better for [lexical analysis][lex].
+
+Most assembler support the import/embedding of binary data directly in a source file, and so will Wyvern:
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&BinaryImport       &&\pro &&\T{binimportop} \quad Filename  \\
+&                   &&\or  &&Label \quad \T{binimportop} \quad Filename  \\
+\\
+
+&Filename           &&\pro &&\text{legal filename enclosed in double quotes}  \\
+\\
+
+&Identifier         &&\pro &&\text{any legal identifier string}  \\
+\\
+
+\end{alignat*}
+$$
+
+The nonterminals $$Filename$$ and $$Identifier$$ are purposfully left vague yet; I haven't fully decided yet what rules I want to enforce there. But this will be taken care of by the lexer and [semantic analysis][sem], so we need not define this just yet.
+
+Finally, any good assembler will support subroutines and some sort of [macro system](https://www.tutorialspoint.com/assembly_programming/assembly_macros.htm). I again defer exact implementation details for later (since we're first going to optimize and transform this CFG soon).
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&Subroutine         &&\pro &&\T{subroutinekeyword} \quad Identifier \quad \T{colon} \quad \T{eol}  \\
+&                   &&     &&Stmts  \\
+&                   &&     &&\T{endsubroutinekeyword} \quad \T{eol}  \\
+\\
+
+\end{alignat*}
+$$
+
+Macros are currently indistinguishable from subroutines. This is going to change before we start implementing. Encoding functionality like macro parameters in CFGs is possible, but unwieldy and cumbersome. We'll add those details to the [semantic actions][semact] for this CFG.
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&Macro              &&\pro &&\T{macrokeyword} \quad Identifier \quad \T{colon} \quad \T{eol}  \\
+&                   &&     &&Stmts  \\
+&                   &&     &&\T{endmacrokeyword} \quad \T{eol}  \\
+\\
+
+\end{alignat*}
+$$
+
+This will capture code blocks of the form
+
+```
+.subroutine Multiply:
+    ; some code
+.endsubroutine
+```
+
+Each subroutine or macro will form their own scope. That is, multiple labels of the same name are allowed:
+
+```
+.subroutine Multiply:
+    Loop:
+    ; some code
+.endsubroutine
+
+
+.subroutine Divide:
+    Loop:
+    ; some code
+.endsubroutine
+```
+
+This context-free grammar for describing a Wyvern module is adequate for now. It will change again next time when we transform it for [top-down parsing][tdp]. Let's look at the 65C02 grammar next.
+
+## The 65C02 Context-Free Grammar
+
+The grammar we designed [last time][wyvern03] is actually already in a pretty good state. You'll find the process I used to minimize the addressing mode-opcode pairing grammar there.
+
+The only thing left to do here, is to connect these two grammars via the $$Instr$$ nonterminal.
+
+$$
+\newcommand{\T}[1]{\texttt{#1}}
+\newcommand{\pro}{\quad \to \quad}
+\newcommand{\or}{\quad \; \mid \quad}
+\begin{alignat*}{3}
+
+&Instr              &&\pro &&MonoInstr  \\
+&                   &&\or  &&DuoInstr  \\
+&                   &&\or  &&TriInstr  \\
+&                   &&\or  &&TetraInstr  \\
+&                   &&\or  &&PentaInstr  \\
+&                   &&\or  &&OctoInstr  \\
+&                   &&\or  &&EnaInstr  \\
+\\
+
+&MonoInstr          &&\pro &&\T{monoalpha} \quad Alpha  \\
+&                   &&\or  &&\T{monobeta} \quad Beta  \\
+&                   &&\or  &&\T{monogamma} \quad Gamma  \\
+&                   &&\or  &&\T{monodelta} \quad Delta  \\
+&                   &&\or  &&\T{monoepsilon} \quad Epsilon  \\
+\\
+
+&DuoInstr           &&\pro &&\T{duozeta} \quad Zeta  \\
+\\
+
+&TriInstr           &&\pro &&\T{trieta} \quad Eta  \\
+&                   &&\or  &&\T{tritheta} \quad Theta  \\
+&                   &&\or  &&\T{triiota} \quad Iota  \\
+&                   &&\or  &&\T{trikappa} \quad Kappa  \\
+\\
+
+&TetraInstr         &&\pro &&\T{tetralambda} \quad Lambda  \\
+\\
+
+&PentaInstr         &&\pro &&\T{pentamu} \quad Mu  \\
+&                   &&\or  &&\T{pentanu} \quad Nu  \\
+&                   &&\or  &&\T{pentaxi} \quad Xi  \\
+\\
+
+&OctoInstr          &&\pro &&\T{octoomicron} \quad Omicron  \\
+\\
+
+&EnaInstr           &&\pro &&\T{enapi} \quad Pi  \\
+\\
+
+\end{alignat*}
+$$
+
+That's it. Now we can start writing modules with 65C02 code in it. Well, it's still a *bit* away, as we haven't written a single line of code yet.
+
+## Conclusion
+
+Admittedly, designing a context-free grammar by hand is rather tedious. But I think it's important to see the process, as it's often glossed over in literature relating to compiler programming, imho. Because here we can already see some problems that might creep up in the future. For example, the nonterminal $$Instr$$ is a bit problematic if we wish to expand (which I do) modules to be architecture-agnostic. This will require some additional thoughts in the future. But for now, we're content with an assembler that supports 65C02 only.
+
+Next time, we'll take these two context-free grammars and optimize them for [top-down parsing][tdp]. This will (hopefully) be the final design theory-heavy post before we finally get to see some code! Exciting!
 
 
 [wyvern01]: {% post_url wyvern/2022-03-10-wyvern-01 %}
@@ -58,6 +360,7 @@ Problems with assembly languages:
 [syn]: https://en.wikipedia.org/wiki/Parsing
 [cfg]: https://en.wikipedia.org/wiki/Context-free_grammar
 [sem]: https://en.wikipedia.org/wiki/Compiler#Front_end
+[semact]: https://lambda.uta.edu/cse5317/notes/node27.html
 [tdp]: https://en.wikipedia.org/wiki/Top-down_parsing
 [bup]: https://en.wikipedia.org/wiki/Bottom-up_parsing
 [orthogonal]: https://en.wikipedia.org/wiki/Orthogonal_instruction_set
@@ -71,3 +374,4 @@ Problems with assembly languages:
 [octal]: https://en.wikipedia.org/wiki/Octal
 [binary]: https://en.wikipedia.org/wiki/Binary_number
 [re]: https://en.wikipedia.org/wiki/Regular_expression
+[projrep]: https://github.com/georgjz/wyvern-assembler
