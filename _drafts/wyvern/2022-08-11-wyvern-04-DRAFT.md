@@ -93,7 +93,7 @@ $$
 \end{alignat*}
 $$
 
-The body of a module is made up of import statements and/or code blocks. All import statements have to precede any code blocks. A code block is either a series of code statements, a subroutine or a macro. I'm purposfully layed it out this way so I can add additional functionality easily later. Next, we'll look at what actual code looks like. This section of the CFG is very important because these productions will actually emit code later on. All others so far only provide meta-information that will be embedded into the object file the assembler generates.
+The body of a module is made up of import statements and/or code blocks. All import statements have to precede any code blocks. A code block is either a series of code statements, a subroutine, or a macro. I purposefully lay it out this way so I can add additional functionality easily later. Next, we'll look at what the actual code looks like. This section of the CFG is very important because these productions will actually emit code later on. All others so far only provide meta-information that will be embedded into the object file the assembler generates.
 
 $$
 \newcommand{\T}[1]{\texttt{#1}}
@@ -113,7 +113,7 @@ $$
 \end{alignat*}
 $$
 
-Capturing the "comment only line" in $$Stmts$$ is a bit hamfisted, but it'll do for now. Statements are either assembly code, or data:
+Capturing the "comment only line" in $$Stmts$$ is a bit hamfisted, but it'll do for now. Statements are either assembly code or data:
 
 $$
 \newcommand{\T}[1]{\texttt{#1}}
@@ -202,7 +202,7 @@ Label: .byte $01, $02, $03
 
 You may have noticed that I use a few terminals of the form $$\texttt{bytedecl}$$ or $$\texttt{binimportop}$$ which aren't really defined yet; think of `.byte` and `.import` as examples. Remember that terminals will be handled by the lexer, not the parser. We'll gather all of the terminals later on in development and replace them with [regular expressions][re] which are better for [lexical analysis][lex].
 
-Most assembler support the import/embedding of binary data directly in a source file, and so will Wyvern:
+Most assemblers support the import/embedding of binary data directly in a source file, and so will Wyvern:
 
 $$
 \newcommand{\T}[1]{\texttt{#1}}
@@ -223,7 +223,7 @@ $$
 \end{alignat*}
 $$
 
-The nonterminals $$Filename$$ and $$Identifier$$ are purposfully left vague yet; I haven't fully decided yet what rules I want to enforce there. But this will be taken care of by the lexer and [semantic analysis][sem], so we need not define this just yet.
+The nonterminals $$Filename$$ and $$Identifier$$ are purposefully left vague yet; I haven't fully decided yet what rules I want to enforce there. But this will be taken care of by the lexer and [semantic analysis][sem], so we need not define this just yet.
 
 Finally, any good assembler will support subroutines and some sort of [macro system](https://www.tutorialspoint.com/assembly_programming/assembly_macros.htm). I again defer exact implementation details for later (since we're first going to optimize and transform this CFG soon).
 
@@ -241,7 +241,7 @@ $$
 \end{alignat*}
 $$
 
-Macros are currently indistinguishable from subroutines. This is going to change before we start implementing. Encoding functionality like macro parameters in CFGs is possible, but unwieldy and cumbersome. We'll add those details to the [semantic actions][semact] for this CFG.
+Macros are currently indistinguishable from subroutines. This is going to change before we start implementing. Encoding functionality like macro parameters in CFGs is possible but unwieldy and cumbersome. We'll add those details to the [semantic actions][semact] for this CFG.
 
 $$
 \newcommand{\T}[1]{\texttt{#1}}
@@ -265,7 +265,7 @@ This will capture code blocks of the form
 .endsubroutine
 ```
 
-Each subroutine or macro will form their own scope. That is, multiple labels of the same name are allowed:
+Each subroutine or macro will form its own scope. That is, multiple labels of the same name are allowed:
 
 ```
 .subroutine Multiply:
@@ -286,7 +286,7 @@ This context-free grammar for describing a Wyvern module is adequate for now. It
 
 The grammar we designed [last time][wyvern03] is actually already in a pretty good state. You'll find the process I used to minimize the addressing mode-opcode pairing grammar there.
 
-The only thing left to do here, is to connect these two grammars via the $$Instr$$ nonterminal.
+The only thing left to do here is to connect these two grammars via the $$Instr$$ nonterminal.
 
 $$
 \newcommand{\T}[1]{\texttt{#1}}
@@ -336,11 +336,11 @@ $$
 \end{alignat*}
 $$
 
-That's it. Now we can start writing modules with 65C02 code in it. Well, it's still a *bit* away, as we haven't written a single line of code yet.
+That's it. Now we can start writing modules with 65C02 code in them. Well, it's still a *bit* away, as we haven't written a single line of code yet.
 
 ## Conclusion
 
-Admittedly, designing a context-free grammar by hand is rather tedious. But I think it's important to see the process, as it's often glossed over in literature relating to compiler programming, imho. Because here we can already see some problems that might creep up in the future. For example, the nonterminal $$Instr$$ is a bit problematic if we wish to expand (which I do) modules to be architecture-agnostic. This will require some additional thoughts in the future. But for now, we're content with an assembler that supports 65C02 only.
+Admittedly, designing a context-free grammar by hand is rather tedious. But I think it's important to see the process, as it's often glossed over in literature relating to compiler programming, IMHO. Because here we can already see some problems that might creep up in the future. For example, the nonterminal $$Instr$$ is a bit problematic if we wish to expand (which I do) modules to be architecture-agnostic. This will require some additional thoughts in the future. But for now, we're content with an assembler that supports 65C02 only.
 
 Next time, we'll take these two context-free grammars and optimize them for [top-down parsing][tdp]. This will (hopefully) be the final design theory-heavy post before we finally get to see some code! Exciting!
 
