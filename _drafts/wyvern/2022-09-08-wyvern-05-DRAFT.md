@@ -13,7 +13,7 @@ comments:   true
 
 ## Context-Free Grammars and Parsers
 
-In the [first post about Wyvern][wyvern01], I shortly touched on the differences between [top-down][tdp] and [buttom-up parsing][bup]. Don't worry, I'm not reiterating that here. Rather, we'll first give some definitions for properties of context-free grammars. These properties will help us determine whether a given grammar can be parsed by an $$LL$$ parser, as we desire. Here's an incomplete list of properties a context-free grammar can have. For a more complete description, see ["Properties of deterministic top-down grammars"](https://www.sciencedirect.com/science/article/pii/S0019995870904468?via%3Dihub). Each property will be annoted whether it is [decidable][decision] or not. This won't really affect our implementation, but it's useful to know if you plan to write your own little grammar tool.
+In the [first post about Wyvern][wyvern01], I shortly touched on the differences between [top-down][tdp] and [buttom-up parsing][bup]. Don't worry, I'm not reiterating that here. Rather, we'll first give some definitions for properties of context-free grammars. These properties will help us determine whether a given grammar can be parsed by an $$LL$$ parser, as we desire. Here's an incomplete list of properties a context-free grammar can have. For a more complete description, see ["Properties of deterministic top-down grammars"](https://www.sciencedirect.com/science/article/pii/S0019995870904468?via%3Dihub). Each property will be annoted whether it is [decidable][decision] or not. This won't really affect our implementation, but it's useful to know if you plan to read more on context-free grammars and parsers.
 
 ##### Context-Free Grammar
 A context-free grammar is a 4-tuple $$G = (V, \Sigma, R, S)$$, where
@@ -47,7 +47,7 @@ A grammar $$G$$ is **left recursive** if it has a nonterminal $$X$$ such that th
 
 A grammar $$G$$ is **right recursive** if it has a nonterminal $$X$$ such that there is a derivation $$X \; \xRightarrow{+} \; \alphaX$$ for any string $$\alpha$$.
 
-The two important properties here are nullable and cyclic. To transform
+The three important properties here are nullable, cyclic and left recursive. To transform our context-free grammar into a grammar from the subclass of $$LL(1)$$ grammars, we need to ensure that it has no nullable and no cyclic derivations, and eliminate all left recursion.
 
 
 [wyvern01]: {% post_url wyvern/2022-03-10-wyvern-01 %}
