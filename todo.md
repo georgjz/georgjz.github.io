@@ -22,6 +22,8 @@
   - [x] Fix Link gif
 - [ ] SAA07:
   - [ ] Fix bug to move sprites off-screen
+- [ ] SAA10:
+  - [ ] Fix GIF size
 
 ## Wyvern
 
