@@ -16,6 +16,7 @@ comments:   true
 In the [first post about Wyvern][wyvern01], I shortly touched on the differences between [top-down][tdp] and [buttom-up parsing][bup]. Don't worry, I'm not reiterating that here. Rather, we'll first give some definitions for properties of context-free grammars. These properties will help us determine whether a given grammar can be parsed by an $$LL$$ parser, as we desire. Here's an incomplete list of properties a context-free grammar can have. For a more complete description, see ["Properties of deterministic top-down grammars"](https://www.sciencedirect.com/science/article/pii/S0019995870904468?via%3Dihub). Each property will be annoted whether it is [decidable][decision] or not. This won't really affect our implementation, but it's useful to know if you plan to read more on context-free grammars and parsers.
 
 ##### Context-Free Grammar
+
 A context-free grammar is a 4-tuple $$G = (V, \Sigma, R, S)$$, where
 * $$V$$ is a finite set of *variables* or *nonterminals*
 * $$\Sigma$$ is a finite set of *terminals*, this set is disjoint from $$V$$
@@ -25,24 +26,31 @@ A context-free grammar is a 4-tuple $$G = (V, \Sigma, R, S)$$, where
 Context-free grammars are a form of [formal grammar][formal], the key difference being that the head of any rewrite rule may only contain a single nonterminal $$X\in V$$. This restriction is non-trivial. That is, this restriction gives context-free grammars special powers but also limits their applications.
 
 ###### Ambiguity
+
 A context-free grammar is **ambiguous** iff for string $$\alpha \in L(G)$$ there are two or more derivations (aka, a context-free grammar is unambiguous if each string's derivation is unique). Undecidable.
 
 ###### Productivity
+
 A nonterminal $$X \in V$$ is **productive** iff there is a derivation $$X \; \xRightarrow{\ast} \; \alpha$$ of some string $$\alpha \in \Sigma^{\ast}$$. Decidable.
 
 ###### Reachability
+
 A nonterminal $$X \in V$$ is **reachable** if there is a derivation $$S \; \xRightarrow{\ast} \; \alpha X \beta$$, where $$\alpha$$ and $$\beta$$ are strings of nonterminals and terminals, and $$S$$ the start symbol. Decidable.
 
 ###### Usability
+
 A nonterminal $$X \in V$$ is **useless** if it is *unproductive* or *unreachable*. Decidable by extension.
 
 ###### Nullability
+
 A nonterminal $$X \in V$$ is **nullable** if there is a derivation $$X \; \xRightarrow{\ast} \; \epsilon$$. Decidable.
 
 ###### Cyclicity
+
 A derivation $$X \; \xRightarrow{+} \; X$$ is called a **cycle**. Decidable.
 
 ###### Left and Right Recursion
+
 A grammar $$G$$ is **left recursive** if it has a nonterminal $$X$$ such that there is a derivation $$X \; \xRightarrow{+} \; X\alpha$$ for any string $$\alpha$$.
 
 A grammar $$G$$ is **right recursive** if it has a nonterminal $$X$$ such that there is a derivation $$X \; \xRightarrow{+} \; \alphaX$$ for any string $$\alpha$$.
