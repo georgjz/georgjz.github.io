@@ -57,6 +57,12 @@ A grammar $$G$$ is **right recursive** if it has a nonterminal $$X$$ such that t
 
 The three important properties here are nullable, cyclic and left recursive. To transform our context-free grammar into a grammar from the subclass of $$LL(1)$$ grammars, we need to ensure that it has no nullable and no cyclic derivations, and eliminate all left recursion.
 
+We're going to employ the following heuristic-y algorithm:
+
+1. Remove all left recursion
+2. Expose $$FIRST$$ set clashes
+3. Left-factor
+4. Attempt to remove $$FIRST$$/$$FOLLOW$$ set clashes
 
 [wyvern01]: {% post_url wyvern/2022-03-10-wyvern-01 %}
 [wyvern02]: {% post_url wyvern/2022-06-02-wyvern-02 %}
