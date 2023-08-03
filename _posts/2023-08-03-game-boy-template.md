@@ -8,13 +8,17 @@ published:  true
 comments:   true
 ---
 
-Has it been a year since I last posted? It seems so. Shame on me. New job, new place, fixing relationships with people I dearly love and missed despite me being an unredeemable ingrate - you know, standard stuff.
+Has it been a year since I last posted? It seems so. Shame on me. New job, new place, fixing my relationship with someone I dearly love and missed despite me being an unredeemable ingrate - you know, standard stuff.
 
 Anyways, the [Game Boy Competition 2023][gbcompo23] is on! A game jam to create a game for the [Game Boy][gb] within three months. 
 
 I shall venture to participate in said game jam. Why start with only a bit more than a month left? *Because I'm bad with schedules (on this blog), you should know this by now.* (◕‿◕)
 
 But I'm *somewhat* good with [CMake][cmake] and assembly, so I created [this glorious project template for Game Boy games][template]. It's meant to reduce the mental overhead of building a project. This should let you focus more on actual development and coding instead of organizing your files.
+
+
+[![georgjz/game-boy-cradle-rgbds - GitHub](https://gh-card.dev/repos/georgjz/game-boy-cradle-rgbds.svg)](https://github.com/georgjz/game-boy-cradle-rgbds)
+
 
 Now, is there going to be a dev diary about my Game Boy Color game? Probably!
 
