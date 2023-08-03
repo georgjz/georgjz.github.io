@@ -8,7 +8,7 @@ published:  true
 comments:   true
 ---
 
-Has it been a year since I last posted? It seems so. Shame on me. New job, new place, fixing my relationship with someone I dearly love and missed despite me being an unredeemable ingrate - you know, standard stuff.
+Has it been a year since I last posted? It seems so. Shame on me. New job, new place, fixing my relationship with someone I dearly love and missed despite me being an irredeemable ingrate - you know, standard stuff.
 
 Anyways, the [Game Boy Competition 2023][gbcompo23] is on! A game jam to create a game for the [Game Boy][gb] within three months. 
 
